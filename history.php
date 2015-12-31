@@ -28,9 +28,14 @@ class History {
         }
         $sel = $page->get_selection($table);
 
-        $st = $page->conn->prepare("SELECT $sel FROM $table WHERE $field=:uuid ORDER BY time");
+        $limit = $page->settings->limit_per_page;
 
+        $offset = History::get_offset($type);
+
+        $st = $page->conn->prepare("SELECT $sel FROM $table WHERE $field=:uuid ORDER BY time DESC LIMIT :limit OFFSET :offset");
         $st->bindParam(":uuid", $uuid, PDO::PARAM_STR);
+        $st->bindParam(":limit", $limit, PDO::PARAM_INT);
+        $st->bindParam(":offset", $offset, PDO::PARAM_INT);
 
         if ($st->execute()) {
             while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
@@ -53,6 +58,16 @@ class History {
             return 0;
         }
         return ($a < $b) ? 1 : -1;
+    }
+
+    static function get_offset($table) {
+        $v = $table[0];
+        if (isset($_GET[$v]) && is_string($_GET[$v])) {
+            if (filter_var($_GET[$v], FILTER_VALIDATE_INT)) {
+                return (int)$_GET[$v];
+            }
+        }
+        return 0;
     }
 }
 
@@ -115,24 +130,35 @@ try {
     if (!empty($all)) {
         $page->table_begin();
 
-        $offset = 0;
         $limit = $page->settings->limit_per_page;
 
+        /*$offset = 0;
         if ($page->settings->show_pager) {
             $current_page = $page->page - 1;
             $offset = ($limit * $current_page);
             $limit += $offset;
-        }
+        }*/
+
+        $totalb = 0;
+        $totalm = 0;
+        $totalw = 0;
+        $totalk = 0;
 
         $i = 0;
         foreach ($all as $row) {
             $i++;
-            if ($page->settings->show_pager && $i < $offset) {
+            /*if ($page->settings->show_pager && $i < $offset) {
                 continue;
-            }
+            }*/
             if ($i > $limit) break;
 
             $type = $row['__table__'];
+
+            if ($type == 'bans') $totalb++;
+            elseif ($type == 'mutes') $totalm++;
+            elseif ($type == 'warnings') $totalw++;
+            elseif ($type == 'kicks') $totalk++;
+
             $page->set_info($page->type_info($type));
 
             $style = 'style="font-size: 13px;"';
@@ -148,6 +174,7 @@ try {
                 'Reason'    => $page->clean($row['reason']),
                 'Date'      => $page->millis_to_date($row['time']),
                 'Expires'   => $page->expiry($row),
+                //'i' => $i . "/" . $limit . "/" . $total,
             ));
         }
 
@@ -162,7 +189,17 @@ try {
             if ($staffhistory) {
                 $args .= "&staffhistory=1";
             }
-            $page->print_pager($total, $args);
+
+            $prevargs = $args;
+
+            $offb = History::get_offset("b") + $totalb;
+            $offm = History::get_offset("m") + $totalm;
+            $offw = History::get_offset("w") + $totalw;
+            $offk = History::get_offset("k") + $totalk;
+
+            $args .= "&b=$offb&m=$offm&w=$offw&k=$offk";
+
+            $page->print_pager($total, $args, $prevargs);
         }
     } else {
         echo "No punishments found.<br>";

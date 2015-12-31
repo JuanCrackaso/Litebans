@@ -339,7 +339,7 @@ class Page {
          ';
     }
 
-    function print_pager($total = -1, $args = "") {
+    function print_pager($total = -1, $args = "", $prevargs = "") {
         $table = $this->table;
         $page = $this->name . ".php";
 
@@ -363,7 +363,7 @@ class Page {
 
         $pager_prev = "<div class=\"litebans-pager litebans-pager-left $prev_class\">«</div>";
         if ($prev_active) {
-            $pager_prev = "<a href=\"$page?page={$prev}{$args}\">$pager_prev</a>";
+            $pager_prev = "<a href=\"$page?page={$prev}{$prevargs}\">$pager_prev</a>";
         }
 
         $pager_next = "<div class=\"litebans-pager litebans-pager-right $next_class\">»</div>";
