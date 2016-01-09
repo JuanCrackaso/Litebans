@@ -1,8 +1,4 @@
 <?php
-namespace litebans;
-
-use PDO;
-use PDOException;
 
 class Header {
 /**
@@ -30,7 +26,7 @@ function __construct($page) {
                 'kicks.php'    => $row['c_kicks'],
             );
         } catch (PDOException $ex) {
-            die($ex->getMessage());
+            Settings::handle_database_error($page->settings, $ex);
         }
     }
 }
@@ -62,10 +58,10 @@ $settings = $this->page->settings;
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="LiteBans">
-    <link rel="shortcut icon" href="includes/img/minecraft.ico">
+    <link rel="shortcut icon" href="inc/img/minecraft.ico">
     <!-- CSS -->
-    <link href="includes/css/bootstrap.min.css" rel="stylesheet">
-    <link href="includes/css/custom.css" rel="stylesheet">
+    <link href="inc/css/bootstrap.min.css" rel="stylesheet">
+    <link href="inc/css/custom.css" rel="stylesheet">
     <script type="text/javascript">
         function withjQuery(f) {
             if (window.jQuery) f();
@@ -110,5 +106,4 @@ $settings = $this->page->settings;
 <?php
 }
 }
-
 ?>

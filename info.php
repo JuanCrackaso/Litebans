@@ -1,9 +1,5 @@
 <?php
-namespace litebans;
-
-use PDO;
-
-require_once './includes/page.php';
+require_once './inc/page.php';
 
 abstract class Info {
     /**

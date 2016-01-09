@@ -1,10 +1,8 @@
 <?php
-namespace litebans;
+require_once './inc/page.php';
 
-require_once './includes/page.php';
 $page = new Page("index");
 $page->print_title();
-
 ?>
 <div class="container">
     <div class="jumbotron">

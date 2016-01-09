@@ -1,8 +1,4 @@
 <?php
-namespace litebans;
-
-use PDO;
-use PDOException;
 
 class Page {
     public function __construct($name, $header = true) {
@@ -12,9 +8,9 @@ class Page {
 
         $this->time = microtime(true);
         if ($header) {
-            require_once './includes/header.php';
+            require_once './inc/header.php';
         }
-        require_once './includes/settings.php';
+        require_once './inc/settings.php';
         $settings = new Settings();
         $this->conn = $settings->conn;
         $this->settings = $settings;
@@ -129,7 +125,7 @@ class Page {
 
             return $st;
         } catch (PDOException $ex) {
-            die($ex->getMessage());
+            Settings::handle_database_error($this->settings, $ex);
         }
     }
 
@@ -381,7 +377,7 @@ class Page {
         $time = microtime(true) - $this->time;
         echo "<!-- Page generated in $time seconds. -->";
 
-        include_once './includes/footer.php';
+        include_once './inc/footer.php';
     }
 
     function table_begin() {

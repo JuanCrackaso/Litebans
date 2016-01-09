@@ -1,12 +1,11 @@
 <?php
-namespace litebans;
-
-use PDO;
-use PDOException;
 
 final class Settings {
     public static $TRUE = "1", $FALSE = "0";
 
+    /**
+     * @param bool|true $connect
+     */
     public function __construct($connect = true) {
         // Server name, shown on the main page and on the header
         $this->name = 'LiteBans';
@@ -44,7 +43,7 @@ final class Settings {
             "CONSOLE", "Console",
         );
         $this->console_name = "Console";
-        $this->console_image = "includes/img/console.png";
+        $this->console_image = "inc/img/console.png";
 
         // Avatar images for all players will be fetched from this URL.
         // Examples:
@@ -69,6 +68,8 @@ final class Settings {
         // Enable PHP error reporting.
         $error_reporting = true;
 
+        // Enable error pages.
+        $this->error_pages = true;
 
         /*** End of configuration ***/
 
@@ -108,11 +109,38 @@ final class Settings {
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             } catch (PDOException $e) {
-                die('Connection failed: ' . $e->getMessage());
+                Settings::handle_database_error($this, $e);
             }
             if ($driver === 'pgsql') {
                 $this->conn->query("SET NAMES 'UTF8';");
             }
         }
+    }
+
+
+    /**
+     * @param $settings Settings
+     * @param $e Exception
+     */
+    static function handle_database_error($settings, $e) {
+        $message = $e->getMessage();
+        if ($settings->error_pages) {
+            if (strstr($message, "Access denied for user")) {
+                $settings->redirect("error/access-denied.php");
+            }
+            if (strstr($message, "Base table or view not found:")) {
+                $settings->redirect("error/tables-not-found.php");
+            }
+        }
+        die('Database error: ' . $message);
+    }
+
+
+    function redirect($url) {
+        echo "<a href=\"$url\">Redirecting...</a>";
+
+        echo "<script type=\"text/javascript\">document.location=\"$url\";</script>";
+
+        die;
     }
 }

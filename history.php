@@ -1,11 +1,5 @@
 <?php
-namespace litebans;
-
-use PDO;
-use PDOException;
-use PDORow;
-
-require_once './includes/page.php';
+require_once './inc/page.php';
 require_once './info.php';
 
 class History {
@@ -125,7 +119,7 @@ try {
         $total += $count;
     }
 
-    usort($all, array("litebans\\History", "cmp_row_date"));
+    usort($all, array("History", "cmp_row_date"));
 
     if (!empty($all)) {
         $page->table_begin();
@@ -211,5 +205,5 @@ try {
 
     $page->print_footer();
 } catch (PDOException $ex) {
-    die($ex->getMessage());
+    Settings::handle_database_error($page->settings, $ex);
 }

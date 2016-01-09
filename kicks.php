@@ -1,9 +1,6 @@
 <?php
-namespace litebans;
+require_once './inc/page.php';
 
-use PDO;
-
-require_once './includes/page.php';
 $page = new Page("kicks");
 $page->print_title();
 

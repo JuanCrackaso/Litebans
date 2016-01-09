@@ -1,9 +1,5 @@
 <?php
-namespace litebans;
-
-use PDOException;
-
-require_once './includes/page.php';
+require_once './inc/page.php';
 
 class Check {
     public function run($name, $from) {
@@ -64,7 +60,7 @@ class Check {
             }
             */
         } catch (PDOException $ex) {
-            die($ex->getMessage());
+            Settings::handle_database_error($page->settings, $ex);
         }
     }
 
