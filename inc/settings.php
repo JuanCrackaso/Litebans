@@ -3,9 +3,6 @@
 final class Settings {
     public static $TRUE = "1", $FALSE = "0";
 
-    /**
-     * @param bool|true $connect
-     */
     public function __construct($connect = true) {
         // Server name, shown on the main page and on the header
         $this->name = 'LiteBans';
