@@ -16,8 +16,8 @@ final class Settings {
 
         $database = 'litebans';
 
-        $username = 'root';
-        $password = 'password';
+        $username = '';
+        $password = '';
 
         // If you set a table prefix in config.yml, set it here as well
         $table_prefix = "litebans_";
@@ -96,6 +96,10 @@ final class Settings {
 
         $this->driver = $driver;
         if ($connect) {
+            if ($username === "" && $password === "") {
+                $this->redirect("error/unconfigured.php");
+            }
+
             $dsn = "$driver:dbname=$database;host=$host;port=$port";
             if ($driver === 'mysql') {
                 $dsn .= ';charset=utf8';
