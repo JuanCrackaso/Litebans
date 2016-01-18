@@ -390,4 +390,14 @@ class Page {
             echo "<script type=\"text/javascript\">withjQuery(function(){ $('tr').click(function(){var href=$(this).find('a').attr('href');if(href!==undefined)window.location=href;}).hover(function(){\$(this).toggleClass('hover');}); });</script>";
         }
     }
+
+    /**
+     * lcfirst is only supported in PHP >= 5.3
+     * @param $str
+     * @return string
+     */
+    static function lc_first($str) {
+        $str[0] = strtolower($str[0]);
+        return (string)$str;
+    }
 }

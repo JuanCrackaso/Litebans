@@ -30,7 +30,7 @@ class Check {
             $from_type = $page->type_info($from);
             $type = $from_type['type'];
             if ($type !== null) {
-                $href .= "&from=" . lcfirst($from_type['title']);
+                $href .= "&from=" . Page::lc_first($from_type['title']);
             }
 
             echo "<br><script type=\"text/javascript\">document.location=\"$href\";</script>";
