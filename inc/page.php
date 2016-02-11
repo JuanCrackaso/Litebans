@@ -265,13 +265,9 @@ class Page {
     }
 
     function print_title() {
-        $title = $this->title();
+        $title = $this->title;
         $name = $this->settings->name;
         echo "<title>$title - $name</title>";
-    }
-
-    function title() {
-        return ucfirst($this->name);
     }
 
     function print_table_rows($row, $array, $print_headers = true) {
@@ -311,7 +307,7 @@ class Page {
     }
 
     function print_page_header($container_start = true) {
-        $title = $this->title();
+        $title = $this->title;
         if ($container_start) {
             echo '<div class="container">';
         }
