@@ -63,7 +63,7 @@ class Lang {
         $this->kicks_by = "Kicked By";
         $this->kicks_reason = "Reason";
         $this->kicks_when = "Date";
-        $this->mutes_player = "Nameo";
+        $this->mutes_player = "Name";
         $this->mutes_by = "Muted By";
         $this->mutes_reason = "Reason";
         $this->mutes_when = "Muted On";
