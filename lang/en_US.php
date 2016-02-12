@@ -1,10 +1,9 @@
 <?php
-final class Lang {
-    public static $TRUE = "1", $FALSE = "0";
 
+final class Lang {
     public function __construct($connect = true) {
         $this->index_welcome1 = 'Welcome to ';
-	$this->index_welcome2 = '\'s Ban List.';
+        $this->index_welcome2 = '\'s Ban List.';
         $this->index_allsins = 'Here is where all of our punishments are listed.';
         $this->header_index = 'Home';
         $this->header_bans = 'Bans';
@@ -87,4 +86,3 @@ final class Lang {
         $this->warns_no = "No";
     }
 }
-?>

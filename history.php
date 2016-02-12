@@ -77,9 +77,9 @@ $name = $page->get_name($uuid);
 $name !== null or die($page->lang->history_playernotfound);
 
 if ($staffhistory) {
-    $page->name =  $page->lang->history_recentby.$name;
+    $page->name = $page->lang->history_recentby . $name;
 } else {
-    $page->name = $page->lang->history_recentfor.$name;
+    $page->name = $page->lang->history_recentfor . $name;
 }
 
 
@@ -196,11 +196,11 @@ try {
             $page->print_pager($total, $args, $prevargs);
         }
     } else {
-        echo $page->lang->history_nopunishments."<br>";
+        echo $page->lang->history_nopunishments . "<br>";
     }
 
     if ($from_href !== null) {
-        echo "<br><a class=\"btn\" href=\"$from_href\">".$page->lang->history_returnto." $from_title</a>";
+        echo "<br><a class=\"btn\" href=\"$from_href\">" . $page->lang->history_returnto . " $from_title</a>";
     }
 
     $page->print_footer();

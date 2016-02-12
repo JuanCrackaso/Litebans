@@ -130,7 +130,7 @@ $query = "SELECT $sel FROM $table WHERE id=? LIMIT 1";
 $st = $page->conn->prepare($query);
 
 if ($st->execute(array($id))) {
-    ($row = $st->fetch()) or die($page->lang->info_error_notfound1.$type.$page->lang->info_error_notfound2);
+    ($row = $st->fetch()) or die($page->lang->info_error_notfound1 . $type . $page->lang->info_error_notfound2);
 
     $player_name = $page->get_name($row['uuid']);
 

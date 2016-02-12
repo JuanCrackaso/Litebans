@@ -7,7 +7,7 @@ class Page {
         require_once './inc/settings.php';
         $settings = new Settings();
         setlocale(LC_ALL, $settings->lang);
-	require_once './lang/'.$settings->lang.'.php';
+        require_once './lang/' . $settings->lang . '.php';
         $lang = new Lang();
         $this->lang = $lang;
         header('Content-Type: text/html; charset=UTF-8');
@@ -327,7 +327,7 @@ class Page {
         echo '
          <div style="text-align: left;" class="row">
              <div style="margin-left: 15px;">
-                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="'.$this->lang->page_check_user.'"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">'.$this->lang->page_check_submit.'</button></form>
+                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="' . $this->lang->page_check_user . '"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">' . $this->lang->page_check_submit . '</button></form>
              </div>
              <script type="text/javascript">function captureForm(b){var o=$("#output");o.removeClass("in");var x=setTimeout(function(){o.html("<br>")}, 150);$.ajax({type:"GET",url:"check.php?name="+$("#user").val()+"&table=' . $table . '"}).done(function(c){clearTimeout(x);o.html(c);o.addClass("in")});b.preventDefault();return false};</script>
              <div id="output" class="success fade" data-alert="alert" style="margin-left: 15px;"><br></div>
@@ -366,7 +366,7 @@ class Page {
         if ($next_active) {
             $pager_next = "<a href=\"$page?page={$next}{$args}\">$pager_next</a>";
         }
-        $pager_count = '<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">'.$this->lang->page_page.' '.$cur.'/'.$pages.'</div></div>';
+        $pager_count = '<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">' . $this->lang->page_page . ' ' . $cur . '/' . $pages . '</div></div>';
         echo "$pager_prev $pager_next $pager_count";
     }
 

@@ -1,10 +1,9 @@
 <?php
-final class Lang {
-    public static $TRUE = "1", $FALSE = "0";
 
+final class Lang {
     public function __construct($connect = true) {
         $this->index_welcome1 = 'Vítej na ';
-	$this->index_welcome2 = '.';
+        $this->index_welcome2 = '.';
         $this->index_allsins = 'Zde nalezneš vypsány všechny své tresty.';
         $this->header_index = 'Úvod';
         $this->header_bans = 'Bany';
@@ -87,4 +86,5 @@ final class Lang {
         $this->warns_no = "Ne";
     }
 }
+
 ?>

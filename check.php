@@ -21,7 +21,7 @@ class Check {
             }
             if (!isset($uuid)) {
                 $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-                $this->println("$name ".$page->lang->check_notjoin);
+                $this->println("$name " . $page->lang->check_notjoin);
                 return;
             }
             $href = "history.php?uuid=$uuid";
