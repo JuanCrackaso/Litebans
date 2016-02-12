@@ -16,11 +16,11 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        'Name'        => $page->get_avatar($player_name, $row['uuid']),
-        'Muted By'    => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        'Reason'      => $page->clean($row['reason']),
-        'Muted On'    => $page->millis_to_date($row['time']),
-        'Muted Until' => $page->expiry($row),
+        $page->lang->mutes_player => $page->get_avatar($player_name, $row['uuid']),
+        $page->lang->mutes_by     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->lang->mutes_reason => $page->clean($row['reason']),
+        $page->lang->mutes_when   => $page->millis_to_date($row['time']),
+        $page->lang->mutes_expiry => $page->expiry($row),
     ));
 }
 $page->table_end();

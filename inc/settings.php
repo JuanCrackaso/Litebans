@@ -4,6 +4,9 @@ final class Settings {
     public static $TRUE = "1", $FALSE = "0";
 
     public function __construct($connect = true) {
+        // Server lang, use standard abbreviations
+        $this->lang = 'en_US'
+
         // Server name, shown on the main page and on the header
         $this->name = 'LiteBans';
 

@@ -4,14 +4,18 @@ class Page {
     public function __construct($name, $header = true) {
         ini_set('mbstring.internal_encoding', 'UTF-8');
         ini_set('default_charset', 'utf-8');
+        require_once './inc/settings.php';
+        $settings = new Settings();
+        setlocale(LC_ALL, $settings->lang);
+	require_once './lang/'.$settings->lang.'.php';
+        $lang = new Lang();
+        $this->lang = $lang;
         header('Content-Type: text/html; charset=UTF-8');
 
         $this->time = microtime(true);
         if ($header) {
             require_once './inc/header.php';
         }
-        require_once './inc/settings.php';
-        $settings = new Settings();
         $this->conn = $settings->conn;
         $this->settings = $settings;
         $this->uuid_name_cache = array();
@@ -32,15 +36,15 @@ class Page {
         $this->set_info($info);
 
         $this->permanent = array(
-            'ban'  => 'Permanent Ban',
-            'mute' => 'Permanent Mute',
-            'warn' => 'Permanent',
+            'ban'  => $this->lang->page_perm_ban,
+            'mute' => $this->lang->page_perm_mute,
+            'warn' => $this->lang->page_perm_warn,
             'kick' => null,
         );
         $this->expired = array(
-            'ban'  => '(Unbanned)',
-            'mute' => '(Unmuted)',
-            'warn' => '(Expired)',
+            'ban'  => $this->lang->page_expire_ban,
+            'mute' => $this->lang->page_expire_mute,
+            'warn' => $this->lang->page_expire_warn,
             'kick' => null,
         );
 
@@ -60,28 +64,28 @@ class Page {
                 return array(
                     "type"  => "ban",
                     "table" => $settings->table['bans'],
-                    "title" => "Bans",
+                    "title" => $this->lang->page_title_ban,
                 );
             case "mute":
             case "mutes":
                 return array(
                     "type"  => "mute",
                     "table" => $settings->table['mutes'],
-                    "title" => "Mutes",
+                    "title" => $this->lang->page_title_mute,
                 );
             case "warn":
             case "warnings":
                 return array(
                     "type"  => "warn",
                     "table" => $settings->table['warnings'],
-                    "title" => "Warnings",
+                    "title" => $this->lang->page_title_warn,
                 );
             case "kick":
             case "kicks":
                 return array(
                     "type"  => "kick",
                     "table" => $settings->table['kicks'],
-                    "title" => "Kicks",
+                    "title" => $this->lang->page_title_kick,
                 );
             default:
                 return array(
@@ -257,7 +261,7 @@ class Page {
      * @return string
      */
     function millis_to_date($millis) {
-        return date($this->settings->date_format, $millis / 1000);
+        return strftime($this->settings->date_format, $millis / 1000);
     }
 
     function active($row, $field = 'active') {
@@ -323,7 +327,7 @@ class Page {
         echo '
          <div style="text-align: left;" class="row">
              <div style="margin-left: 15px;">
-                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="Player"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">Check</button></form>
+                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="'.$this->lang->page_check_user.'"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">'.$this->lang->page_check_submit.'</button></form>
              </div>
              <script type="text/javascript">function captureForm(b){var o=$("#output");o.removeClass("in");var x=setTimeout(function(){o.html("<br>")}, 150);$.ajax({type:"GET",url:"check.php?name="+$("#user").val()+"&table=' . $table . '"}).done(function(c){clearTimeout(x);o.html(c);o.addClass("in")});b.preventDefault();return false};</script>
              <div id="output" class="success fade" data-alert="alert" style="margin-left: 15px;"><br></div>
@@ -362,7 +366,7 @@ class Page {
         if ($next_active) {
             $pager_next = "<a href=\"$page?page={$next}{$args}\">$pager_next</a>";
         }
-        $pager_count = "<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">Page $cur/$pages</div></div>";
+        $pager_count = '<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">'.$this->lang->page_page.' '.$cur.'/'.$pages.'</div></div>';
         echo "$pager_prev $pager_next $pager_count";
     }
 
