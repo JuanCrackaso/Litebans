@@ -54,11 +54,11 @@ class BanInfo extends Info {
     function basic_info($row, $player_name) {
         $page = $this->page;
         return array(
-            'Banned Player' => $this->punished_avatar($player_name, $row),
-            'Banned By'     => $this->moderator_avatar($row),
-            'Ban Reason'    => $page->clean($row['reason']),
-            'Ban Placed'    => $page->millis_to_date($row['time']),
-            'Expires'       => $page->expiry($row),
+            $page->lang->info_banned_player => $this->punished_avatar($player_name, $row),
+            $page->lang->info_banned_by     => $this->moderator_avatar($row),
+            $page->lang->info_banned_reason => $page->clean($row['reason']),
+            $page->lang->info_banned_when   => $page->millis_to_date($row['time']),
+            $page->lang->info_banned_expiry => $page->expiry($row),
         );
     }
 }
@@ -67,28 +67,28 @@ class MuteInfo extends Info {
     function basic_info($row, $player_name) {
         $page = $this->page;
         return array(
-            'Muted Player' => $this->punished_avatar($player_name, $row),
-            'Muted By'     => $this->moderator_avatar($row),
-            'Mute Reason'  => $page->clean($row['reason']),
-            'Mute Placed'  => $page->millis_to_date($row['time']),
-            'Expires'      => $page->expiry($row),
+            $page->lang->info_muted_player => $this->punished_avatar($player_name, $row),
+            $page->lang->info_muted_by     => $this->moderator_avatar($row),
+            $page->lang->info_muted_reason => $page->clean($row['reason']),
+            $page->lang->info_muted_when   => $page->millis_to_date($row['time']),
+            $page->lang->info_muted_expiry => $page->expiry($row),
         );
     }
 }
 
 class WarnInfo extends Info {
     function name() {
-        return "Warning";
+        return $page->lang->info_warn_name;
     }
 
     function basic_info($row, $player_name) {
         $page = $this->page;
         return array(
-            'Warned Player'  => $this->punished_avatar($player_name, $row),
-            'Warned By'      => $this->moderator_avatar($row),
-            'Warning Reason' => $page->clean($row['reason']),
-            'Warning Placed' => $page->millis_to_date($row['time']),
-            'Expires'        => $page->expiry($row),
+            $page->lang->info_warn_player => $this->punished_avatar($player_name, $row),
+            $page->lang->info_warn_by     => $this->moderator_avatar($row),
+            $page->lang->info_warn_reason => $page->clean($row['reason']),
+            $page->lang->info_warn_when   => $page->millis_to_date($row['time']),
+            $page->lang->info_warn_expiry => $page->expiry($row),
         );
     }
 }
@@ -97,10 +97,10 @@ class KickInfo extends Info {
     function basic_info($row, $player_name) {
         $page = $this->page;
         return array(
-            'Kicked Player' => $this->punished_avatar($player_name, $row),
-            'Kicked By'     => $this->moderator_avatar($row),
-            'Kick Reason'   => $page->clean($row['reason']),
-            'Kick Date'     => $page->millis_to_date($row['time']),
+            $page->lang->info_kick_player => $this->punished_avatar($player_name, $row),
+            $page->lang->info_kick_by     => $this->moderator_avatar($row),
+            $page->lang->info_kick_reason => $page->clean($row['reason']),
+            $page->lang->info_kick_when   => $page->millis_to_date($row['time']),
         );
     }
 }
@@ -110,15 +110,15 @@ if ((substr($_SERVER['SCRIPT_NAME'], -strlen("info.php"))) !== "info.php") {
     return;
 }
 
-isset($_GET['type'], $_GET['id']) && is_string($_GET['type']) && is_string($_GET['id']) or die("Missing arguments (type, id).");
+isset($_GET['type'], $_GET['id']) && is_string($_GET['type']) && is_string($_GET['id']) or die($page->lang->info_error_missingarg);
 
 $type = $_GET['type'];
 $id = $_GET['id'];
 $page = new Page($type);
 
-($page->type !== null) or die("Unknown page type requested.");
+($page->type !== null) or die($page->lang->info_error_unknown);
 
-filter_var($id, FILTER_VALIDATE_INT) or die("Invalid ID.");
+filter_var($id, FILTER_VALIDATE_INT) or die($page->lang->info_error_invalidid);
 
 $id = (int)$id;
 
@@ -130,11 +130,11 @@ $query = "SELECT $sel FROM $table WHERE id=? LIMIT 1";
 $st = $page->conn->prepare($query);
 
 if ($st->execute(array($id))) {
-    ($row = $st->fetch()) or die("Error: $type not found in database.");
+    ($row = $st->fetch()) or die($page->lang->info_error_notfound1.$type.$page->lang->info_error_notfound2);
 
     $player_name = $page->get_name($row['uuid']);
 
-    ($player_name !== null) or die("Error: Player name not found.");
+    ($player_name !== null) or die($page->lang->info_error_notplayer);
 
     $info = Info::create($row, $page, $type);
 

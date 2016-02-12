@@ -67,19 +67,19 @@ class History {
 
 $page = new Page("history");
 
-isset($_GET['uuid']) && is_string($_GET['uuid']) or die("Missing arguments (uuid).");
+isset($_GET['uuid']) && is_string($_GET['uuid']) or die($page->lang->history_missinguuid);
 
 $staffhistory = (isset($_GET['staffhistory']) && $_GET['staffhistory'] === "1");
 
 $uuid = $_GET['uuid'];
 $name = $page->get_name($uuid);
 
-$name !== null or die("Player not found in database.");
+$name !== null or die($page->lang->history_playernotfound);
 
 if ($staffhistory) {
-    $page->name = "Recent Punishments by $name";
+    $page->name =  $page->lang->history_recentby.$name;
 } else {
-    $page->name = "Recent Punishments for $name";
+    $page->name = $page->lang->history_recentfor.$name;
 }
 
 
@@ -162,12 +162,12 @@ try {
             $label = "<span $style class='label label-$label_type'>$label_name</span>";
 
             $page->print_table_rows($row, array(
-                'Type'      => $label,
-                'Player'    => $page->get_avatar($page->get_name($row['uuid']), $row['uuid']),
-                'Moderator' => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-                'Reason'    => $page->clean($row['reason']),
-                'Date'      => $page->millis_to_date($row['time']),
-                'Expires'   => $page->expiry($row),
+                $page->lang->history_tabletype      => $label,
+                $page->lang->history_tableplayer    => $page->get_avatar($page->get_name($row['uuid']), $row['uuid']),
+                $page->lang->history_tablemoderator => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+                $page->lang->history_tablereason    => $page->clean($row['reason']),
+                $page->lang->history_tabledate      => $page->millis_to_date($row['time']),
+                $page->lang->history_tableexpires   => $page->expiry($row),
                 //'i' => $i . "/" . $limit . "/" . $total,
             ));
         }
@@ -196,11 +196,11 @@ try {
             $page->print_pager($total, $args, $prevargs);
         }
     } else {
-        echo "No punishments found.<br>";
+        echo $page->lang->history_nopunishments."<br>";
     }
 
     if ($from_href !== null) {
-        echo "<br><a class=\"btn\" href=\"$from_href\">Return to $from_title</a>";
+        echo "<br><a class=\"btn\" href=\"$from_href\">".$page->lang->history_returnto." $from_title</a>";
     }
 
     $page->print_footer();

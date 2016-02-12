@@ -16,10 +16,10 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        'Name'      => $page->get_avatar($player_name, $row['uuid']),
-        'Kicked By' => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        'Reason'    => $page->clean($row['reason']),
-        'Date'      => $page->millis_to_date($row['time']),
+        $page->lang->kicks_player => $page->get_avatar($player_name, $row['uuid']),
+        $page->lang->kicks_by     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->lang->kicks_reason => $page->clean($row['reason']),
+        $page->lang->kicks_when   => $page->millis_to_date($row['time']),
     ));
 }
 $page->table_end();

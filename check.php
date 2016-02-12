@@ -3,12 +3,12 @@ require_once './inc/page.php';
 
 class Check {
     public function run($name, $from) {
+        $page = new Page("check", false);
         // validate user input
         if (strlen($name) > 16 || !preg_match("/^[0-9a-zA-Z_]{1,16}$/", $name)) {
-            $this->println("Invalid name.");
+            $this->println($page->lang->check_invalid);
             return;
         }
-        $page = new Page("check", false);
         $history = $page->settings->table['history'];
 
         try {
@@ -21,7 +21,7 @@ class Check {
             }
             if (!isset($uuid)) {
                 $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
-                $this->println("$name has not joined before.");
+                $this->println("$name ".$page->lang->check_notjoin);
                 return;
             }
             $href = "history.php?uuid=$uuid";

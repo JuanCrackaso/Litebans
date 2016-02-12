@@ -16,11 +16,11 @@ while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        'Name'             => $page->get_avatar($player_name, $row['uuid']),
-        'Warned By'        => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        'Reason'           => $page->clean($row['reason']),
-        'Warned Until'     => $page->expiry($row),
-        'Received Warning' => (($page->active($row, 'warned') === true) ? "Yes" : "No"),
+        $page->lang->warns_player => $page->get_avatar($player_name, $row['uuid']),
+        $page->lang->warns_by     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->lang->warns_reason => $page->clean($row['reason']),
+        $page->lang->warns_when   => $page->expiry($row),
+        $page->lang->warns_receive => (($page->active($row, 'warned') === true) ? $page->lang->warns_yes : $page->lang->warns_no),
     ));
 }
 $page->table_end();
