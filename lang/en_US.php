@@ -23,10 +23,7 @@ class Lang {
         $this->page_check_user = "Player";
         $this->page_check_submit = "Check";
         $this->page_page = "Page";
-        $this->check_invalid = "Invalid name.";
         $this->check_notjoin = "has not joined before.";
-        $this->history_missinguuid = "Missing arguments (uuid).";
-        $this->history_playernotfound = "Player not found in database.";
         $this->history_recentby = "Recent Punishments by ";
         $this->history_recentfor = "Recent Punishments for ";
         $this->history_tabletype = "Type";
@@ -57,12 +54,6 @@ class Lang {
         $this->info_kick_by = "Kicked By";
         $this->info_kick_reason = "Kick Reason";
         $this->info_kick_when = "Kick Date";
-        $this->info_error_missingarg = "Missing arguments (type, id).";
-        $this->info_error_unknown = "Unknown page type requested.";
-        $this->info_error_invalidid = "Invalid ID";
-        $this->info_error_notfound1 = "Error: ";
-        $this->info_error_notfound2 = " not found in database.";
-        $this->info_error_notplayer = "Error: Player name not found.";
         $this->bans_player = "Name";
         $this->bans_by = "Banned By";
         $this->bans_reason = "Reason";
@@ -78,11 +69,22 @@ class Lang {
         $this->mutes_when = "Muted On";
         $this->mutes_expiry = "Muted Until";
         $this->warns_player = "Name";
-        $this->warns_by = "Varován kým";
+        $this->warns_by = "Warned By";
         $this->warns_reason = "Reason";
         $this->warns_when = "Warned Until";
         $this->warns_receive = "Received Warning";
         $this->warns_yes = "Yes";
         $this->warns_no = "No";
+
+        // Errors which are only accessible from invalid user input or removed pages.
+        $this->check_invalid = "Invalid name.";
+        $this->history_missinguuid = "Missing arguments (uuid).";
+        $this->info_error_missingarg = "Missing arguments (type, id).";
+        $this->info_error_unknown = "Unknown page type requested.";
+        $this->info_error_invalidid = "Invalid ID";
+        $this->info_error_notfound1 = "Error: ";
+        $this->info_error_notfound2 = " not found in database.";
+        $this->info_error_notplayer = "Error: Player name not found.";
+        $this->history_playernotfound = "Player not found in database.";
     }
 }
