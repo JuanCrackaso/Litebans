@@ -60,9 +60,9 @@ final class Settings {
         $this->header_show_totals = true;
 
         // The date format can be changed here.
-        // https://secure.php.net/manual/en/function.date.php
+        // https://secure.php.net/manual/en/function.strftime.php
         // Example of default: July 2, 2015, 9:19 PM
-        $this->date_format = 'F j, Y, g:i A';
+        $this->date_format = '%B %d, %Y, %H:%I %p';
         date_default_timezone_set("UTC");
 
         // Enable PHP error reporting.
