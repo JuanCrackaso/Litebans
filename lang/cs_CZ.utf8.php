@@ -1,7 +1,7 @@
 <?php
 
-final class Lang {
-    public function __construct($connect = true) {
+class Lang {
+    public function __construct() {
         $this->index_welcome1 = 'Vítej na ';
         $this->index_welcome2 = '.';
         $this->index_allsins = 'Zde nalezneš vypsány všechny své tresty.';
