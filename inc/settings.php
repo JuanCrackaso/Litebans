@@ -4,7 +4,7 @@ final class Settings {
     public static $TRUE = "1", $FALSE = "0";
 
     public function __construct($connect = true) {
-        // Server lang, use standard abbreviations
+        // Web interface language. Languages are stored in the "lang/" directory.
         $this->lang = 'en_US';
 
         // Server name, shown on the main page and on the header
