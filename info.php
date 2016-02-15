@@ -78,7 +78,7 @@ class MuteInfo extends Info {
 
 class WarnInfo extends Info {
     function name() {
-        return $page->lang->info_warn_name;
+        return $this->page->lang->info_warn_name;
     }
 
     function basic_info($row, $player_name) {
