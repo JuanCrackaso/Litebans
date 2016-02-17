@@ -130,7 +130,7 @@ final class Settings {
         $message = $e->getMessage();
         if ($settings->error_pages) {
             if (strstr($message, "Access denied for user")) {
-                $settings->redirect("error/access-denied.php");
+                $settings->redirect("error/access-denied.php?error=" . base64_encode($message));
             }
             if (strstr($message, "Base table or view not found:")) {
                 $settings->redirect("error/tables-not-found.php");

@@ -16,6 +16,22 @@
             The web interface was unable to connect to the database using the configuration provided.
             <br>
             Database error: Access denied
+            <br>
+            <?php
+            if (isset($_GET['error'])) {
+                $error = $_GET['error'];
+                if (strlen($error) <= 1024) {
+                    $error = base64_decode($error, true);
+
+                    if ($error !== false) {
+                        // sanitize user input
+                        $error = htmlspecialchars($error, ENT_QUOTES, "UTF-8");
+
+                        echo $error;
+                    }
+                }
+            }
+            ?>
         </div>
         <br>
         <a href="../" class="btn btn-default">Try Again</a>
