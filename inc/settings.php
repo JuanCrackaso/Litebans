@@ -113,7 +113,7 @@ final class Settings {
                 $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             } catch (PDOException $e) {
-                Settings::handle_database_error($this, $e);
+                Settings::handle_error($this, $e);
             }
             if ($driver === 'pgsql') {
                 $this->conn->query("SET NAMES 'UTF8';");
@@ -126,7 +126,7 @@ final class Settings {
      * @param $settings Settings
      * @param $e Exception
      */
-    static function handle_database_error($settings, $e) {
+    static function handle_error($settings, $e) {
         $message = $e->getMessage();
         if ($settings->error_pages) {
             if (strstr($message, "Access denied for user")) {

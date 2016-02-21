@@ -129,7 +129,7 @@ class Page {
 
             return $st;
         } catch (PDOException $ex) {
-            Settings::handle_database_error($this->settings, $ex);
+            Settings::handle_error($this->settings, $ex);
         }
     }
 

@@ -26,7 +26,7 @@ function __construct($page) {
                 'kicks.php'    => $row['c_kicks'],
             );
         } catch (PDOException $ex) {
-            Settings::handle_database_error($page->settings, $ex);
+            Settings::handle_error($page->settings, $ex);
         }
     }
 }
