@@ -271,7 +271,11 @@ class Page {
     function print_title() {
         $title = $this->title;
         $name = $this->settings->name;
-        echo "<title>$title - $name</title>";
+        if ($title === null) {
+            echo "<title>$name</title>";
+        } else {
+            echo "<title>$title - $name</title>";
+        }
     }
 
     function print_table_rows($row, $array, $print_headers = true) {
