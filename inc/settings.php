@@ -108,10 +108,14 @@ final class Settings {
                 $dsn .= ';charset=utf8';
             }
 
+            $options = array(
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_EMULATE_PREPARES   => false,
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            );
+
             try {
-                $this->conn = new PDO($dsn, $username, $password);
-                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+                $this->conn = new PDO($dsn, $username, $password, $options);
             } catch (PDOException $e) {
                 Settings::handle_error($this, $e);
             }
