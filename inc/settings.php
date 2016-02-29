@@ -73,6 +73,9 @@ final class Settings {
 
         /*** End of configuration ***/
 
+
+        /** Don't modify anything here unless you know what you're doing **/
+
         if ($error_reporting) {
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
