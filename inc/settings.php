@@ -5,7 +5,7 @@ final class Settings {
 
     public function __construct($connect = true) {
         // Web interface language. Languages are stored in the "lang/" directory.
-        $this->lang = 'en_US';
+        $this->lang = 'en_US.utf8';
 
         // Server name, shown on the main page and on the header
         $this->name = 'LiteBans';
