@@ -17,11 +17,11 @@
             <br>
             To get started, edit <a class="text-warning">inc/settings.php</a> and fill in your database information.
             <br>
-            After configuration has been completed, click <a class="text-warning">"Try Again"</a>.
+            After configuration has been completed, click <a class="text-warning">"Continue"</a>.
             <br>
         </div>
         <br>
-        <a href="../" class="btn btn-default">Try Again</a>
+        <a href="../" class="btn btn-default">Continue</a>
     </div>
 </div>
 </body>
