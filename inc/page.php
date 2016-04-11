@@ -289,15 +289,15 @@ class Page {
         echo "<tr>";
         foreach ($array as $header => $text) {
             $style = "";
-            if ($header === "Reason") {
+            if ($header === $this->lang->bans_reason || $header === $this->lang->mutes_reason || $header === $this->lang->warns_reason || $header == $this->lang->kicks_reason) {
                 $style = "style=\"width: 30%;\"";
                 if ($text === "") {
                     $text = "-";
                 }
             }
             $a = "a";
-            if ($header === "Received Warning") {
-                $icon = ($text !== "No") ? "glyphicon-ok" : "glyphicon-remove";
+            if ($header === $this->lang->warns_receive) {
+                $icon = ($text !== $this->lang->warns_no) ? "glyphicon-ok" : "glyphicon-remove";
                 $a .= " class=\"glyphicon $icon\" aria-hidden=true";
                 $text = "";
             }
