@@ -86,5 +86,3 @@ class Lang {
         $this->warns_no = "Ne";
     }
 }
-
-?>
