@@ -5,11 +5,13 @@ class Lang {
         $this->index_welcome1 = 'Welcome to ';
         $this->index_welcome2 = '\'s Ban List.';
         $this->index_allsins = 'Here is where all of our punishments are listed.';
+
         $this->header_index = 'Home';
         $this->header_bans = 'Bans';
         $this->header_mutes = 'Mutes';
         $this->header_warnings = 'Warnings';
         $this->header_kicks = 'Kicks';
+
         $this->page_perm_ban = 'Permanent Ban';
         $this->page_perm_mute = 'Permanent Mute';
         $this->page_perm_warn = 'Permanent';
@@ -23,7 +25,9 @@ class Lang {
         $this->page_check_user = "Player";
         $this->page_check_submit = "Check";
         $this->page_page = "Page";
+
         $this->check_notjoin = "has not joined before.";
+
         $this->history_recentby = "Recent Punishments by ";
         $this->history_recentfor = "Recent Punishments for ";
         $this->history_tabletype = "Type";
@@ -34,6 +38,7 @@ class Lang {
         $this->history_tableexpires = "Expires";
         $this->history_nopunishments = "No punishments found.";
         $this->history_returnto = "Return to";
+
         $this->info_banned_player = "Banned Player";
         $this->info_banned_by = "Banned By";
         $this->info_banned_reason = "Ban Reason";
@@ -54,20 +59,24 @@ class Lang {
         $this->info_kick_by = "Kicked By";
         $this->info_kick_reason = "Kick Reason";
         $this->info_kick_when = "Kick Date";
+
         $this->bans_player = "Name";
         $this->bans_by = "Banned By";
         $this->bans_reason = "Reason";
         $this->bans_when = "Banned On";
         $this->bans_expiry = "Banned Until";
+
         $this->kicks_player = "Name";
         $this->kicks_by = "Kicked By";
         $this->kicks_reason = "Reason";
         $this->kicks_when = "Date";
+
         $this->mutes_player = "Name";
         $this->mutes_by = "Muted By";
         $this->mutes_reason = "Reason";
         $this->mutes_when = "Muted On";
         $this->mutes_expiry = "Muted Until";
+
         $this->warns_player = "Name";
         $this->warns_by = "Warned By";
         $this->warns_reason = "Reason";
