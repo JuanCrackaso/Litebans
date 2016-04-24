@@ -87,6 +87,7 @@ final class Settings {
             'warnings' => "${table_prefix}warnings",
             'kicks'    => "${table_prefix}kicks",
             'history'  => "${table_prefix}history",
+            'servers'  => "${table_prefix}servers",
         );
 
         $this->active_query = "";
@@ -119,6 +120,9 @@ final class Settings {
 
             try {
                 $this->conn = new PDO($dsn, $username, $password, $options);
+
+                $st = $this->conn->query("SELECT * FROM " . $this->table['servers'] . " LIMIT 1;");
+                $st->fetch();
             } catch (PDOException $e) {
                 Settings::handle_error($this, $e);
             }
