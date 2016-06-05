@@ -1,14 +1,14 @@
 <?php
 class Lang {
     public function __construct() {
-        $this->index_welcome1 = 'Bienvenido a ';
-        $this->index_welcome2 = '\'s Baneos.';
-        $this->index_allsins = 'Aqui se Encuntran todos los Castigos.';
+        $this->index_welcome1 = 'Bienvenido a la Lista de Sanciones de ';
+        $this->index_welcome2 = ' Network!';
+        $this->index_allsins = 'Aqui se Encuntran todas las Sanciones de la Network.';
         $this->header_index = 'Inicio';
         $this->header_bans = 'Baneos';
         $this->header_mutes = 'Muteos';
         $this->header_warnings = 'Advertencias';
-        $this->header_kicks = 'Kickeos';
+        $this->header_kicks = 'Expulsiones';
         $this->page_perm_ban = 'Baneo Permanente';
         $this->page_perm_mute = 'Muteo Permanente';
         $this->page_perm_warn = 'Permanente';
@@ -18,17 +18,17 @@ class Lang {
         $this->page_title_ban = 'Baneos';
         $this->page_title_mute = 'Muteos';
         $this->page_title_warn = 'Advertencias';
-        $this->page_title_kick = 'Kickeos';
+        $this->page_title_kick = 'Expulsiones';
         $this->page_check_user = "Jugador";
         $this->page_check_submit = "Verificar";
         $this->page_page = "Pagina";
-        $this->check_notjoin = "no ha entrando antes.";
-        $this->history_recentby = "Castigos Recientes por ";
-        $this->history_recentfor = "Castigos Recientes para ";
+        $this->check_notjoin = "no ha entrado antes.";
+        $this->history_recentby = "Sanciones Recientes por ";
+        $this->history_recentfor = "Sanciones Recientes para ";
         $this->history_tabletype = "Tipo";
         $this->history_tableplayer = "Jugador";
         $this->history_tablemoderator = "Moderador";
-        $this->history_tablereason = "Razon";
+        $this->history_tablereason = "Razo";
         $this->history_tabledate = "Fecha";
         $this->history_tableexpires = "Expira";
         $this->history_nopunishments = "Castigos No Encontrados.";
@@ -50,16 +50,16 @@ class Lang {
         $this->info_warn_when = "Advertido en";
         $this->info_warn_expiry = "Expira";
         $this->info_kick_player = "Jugador Kickeado";
-        $this->info_kick_by = "Kickeado en";
-        $this->info_kick_reason = "Razon del Kickeo";
-        $this->info_kick_when = "Fecha del Kickeo";
+        $this->info_kick_by = "Expulsado en";
+        $this->info_kick_reason = "Razon de la Expulsion";
+        $this->info_kick_when = "Fecha de la Expulsion";
         $this->bans_player = "Nombre";
         $this->bans_by = "Baneado por";
         $this->bans_reason = "Razon";
         $this->bans_when = "Baneado en";
         $this->bans_expiry = "Baneado hasta";
         $this->kicks_player = "Nombre";
-        $this->kicks_by = "Kickeado por";
+        $this->kicks_by = "Expulsado por";
         $this->kicks_reason = "Razon";
         $this->kicks_when = "Fecha";
         $this->mutes_player = "Nombre";
