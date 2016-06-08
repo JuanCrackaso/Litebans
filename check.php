@@ -33,7 +33,7 @@ class Check {
                 $href .= "&from=" . Page::lc_first($from_type['title']);
             }
 
-            echo "<br><script type=\"text/javascript\">document.location=\"$href\";</script>";
+            echo "<br><script data-cfasync=\"false\" type=\"text/javascript\">document.location.href=\"$href\";</script>";
             /*
             $table = $page->settings->table['bans'];
 
