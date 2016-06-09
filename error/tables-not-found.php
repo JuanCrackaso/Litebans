@@ -26,6 +26,8 @@
             <br>
             - Ensure that the table prefix is the same in config.yml and settings.php.
             <br>
+            - Ensure that you are using the latest version of LiteBans.
+            <br>
         </div>
         <br>
         <a href="../" class="btn btn-default">Try Again</a>
