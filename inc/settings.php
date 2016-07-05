@@ -146,6 +146,9 @@ final class Settings {
             if (strstr($message, "Base table or view not found:")) {
                 $settings->redirect("error/tables-not-found.php");
             }
+            if (strstr($message, "Unknown column")) {
+                $settings->redirect("error/outdated-plugin.php");
+            }
         }
         die('Database error: ' . $message);
     }
