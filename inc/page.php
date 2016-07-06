@@ -137,9 +137,12 @@ class Page {
         // Under certain versions of PHP, there is a bug with BIT columns.
         // An empty string is returned no matter what the value is.
         // Workaround: cast to unsigned.
-        $selection = "id,uuid,reason,banned_by_name,banned_by_uuid,removed_by_name,time,until,CAST(active AS UNSIGNED) AS active";
+        $selection = "id,uuid,reason,banned_by_name,banned_by_uuid,time,until,CAST(active AS UNSIGNED) AS active";
         if ($table === $this->settings->table['warnings']) {
             $selection .= ",CAST(warned AS UNSIGNED) AS warned";
+        }
+        if ($table !== $this->settings->table['kicks']) {
+            $selection .= "removed_by_name";
         }
         return $selection;
     }
