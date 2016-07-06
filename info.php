@@ -141,7 +141,7 @@ if ($st->execute(array($id))) {
     $name = $info->name();
     $permanent = $info->permanent();
 
-    $page->name = "$name #$id";
+    $page->name = $page->title = "$name #$id";
     $page->print_title();
 
     if (!($info instanceof KickInfo)) {
