@@ -14,8 +14,10 @@ class Lang {
         $this->page_perm_mute = 'Umlčen navždy';
         $this->page_perm_warn = 'Trvalé varování';
         $this->page_expire_ban = '(Odbanován)';
+        $this->page_expire_ban_by = '(Odbanován kým $name)';
         $this->page_expire_mute = '(Odmlčen)';
-        $this->page_expire_warn = '(Vypršel)';
+        $this->page_expire_mute_by = '(Odmlčen kým $name)';
+        $this->page_expire = '(Vypršel)';
         $this->page_title_ban = 'Bany';
         $this->page_title_mute = 'Umlčení';
         $this->page_title_warn = 'Varování';

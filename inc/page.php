@@ -44,7 +44,13 @@ class Page {
         $this->expired = array(
             'ban'  => $this->lang->page_expire_ban,
             'mute' => $this->lang->page_expire_mute,
-            'warn' => $this->lang->page_expire_warn,
+            'warn' => $this->lang->page_expire,
+            'kick' => null,
+        );
+        $this->expired_by = array(
+            'ban'  => $this->lang->page_expire_ban_by,
+            'mute' => $this->lang->page_expire_mute_by,
+            'warn' => $this->lang->page_expire,
             'kick' => null,
         );
 
@@ -142,7 +148,7 @@ class Page {
             $selection .= ",CAST(warned AS UNSIGNED) AS warned";
         }
         if ($table !== $this->settings->table['kicks']) {
-            $selection .= ",removed_by_name";
+            $selection .= ",removed_by_uuid,removed_by_name";
         }
         return $selection;
     }
@@ -223,9 +229,10 @@ class Page {
      * Prepares text to be displayed on the web interface.
      * Removes chat colours, replaces newlines with proper HTML, and sanitizes the text.
      * @param string
-     * @return string
+     * @return string|null
      */
     function clean($text) {
+        if ($text === null) return null;
         if (strstr($text, "\xa7") || strstr($text, "&")) {
             $text = preg_replace("/(?i)(\xa7|&)[0-9A-FK-OR]/", "", $text);
         }
@@ -252,8 +259,30 @@ class Page {
         } else {
             $until = $this->millis_to_date($row['until']);
         }
-        if ($this->settings->show_inactive_bans && $this->active($row) === false) {
-            $until .= ' ' . $this->expired[$this->type];
+        if ($this->active($row) === false) {
+            $until .= ' ';
+
+            $done = false;
+
+            // Unbanned by $name
+            $removed_by_uuid = $row['removed_by_uuid'];
+            if ($removed_by_uuid !== null) {
+                // Player has been unbanned
+
+                // Check if uuid can be converted to name
+                $name = $this->get_name($removed_by_uuid);
+                if ($name === null) {
+                    // Couldn't find name in history table, use removed_by_name instead
+                    $name = $this->clean($row['removed_by_name']);
+                }
+                if ($name !== null) {
+                    $until .= str_replace('$name', $name, $this->expired_by[$this->type]);
+                    $done = true;
+                }
+            }
+            if (!$done) {
+                $until .= $this->expired[$this->type];
+            }
         }
         return $until;
     }

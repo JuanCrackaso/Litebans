@@ -13,8 +13,10 @@ class Lang {
         $this->page_perm_mute = 'Muteo Permanente';
         $this->page_perm_warn = 'Permanente';
         $this->page_expire_ban = '(Desbaneado)';
+        $this->page_expire_ban_by = '(Desbaneado por $name)';
         $this->page_expire_mute = '(Desmuteado)';
-        $this->page_expire_warn = '(Expirado)';
+        $this->page_expire_mute_by = '(Desmuteado por $name)';
+        $this->page_expire = '(Expirado)';
         $this->page_title_ban = 'Baneos';
         $this->page_title_mute = 'Muteos';
         $this->page_title_warn = 'Advertencias';
