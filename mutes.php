@@ -2,9 +2,9 @@
 require_once './inc/page.php';
 
 $page = new Page("mutes");
-$page->print_title();
 
-$page->print_page_header();
+$page->print_title();
+$page->print_header();
 
 $page->print_check_form();
 

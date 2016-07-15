@@ -156,7 +156,7 @@ if ($st->execute(array($id))) {
             $page->name .= "<span $style class='label label-danger'>Permanent</span>";
         }
     }
-    $page->print_page_header();
+    $page->print_header();
 
     $page->table_begin();
     $map = $info->basic_info($row, $player_name);

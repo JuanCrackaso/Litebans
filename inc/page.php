@@ -346,7 +346,7 @@ class Page {
         echo "<tbody>";
     }
 
-    function print_page_header($container_start = true) {
+    function print_header($container_start = true) {
         $title = $this->title;
         if ($container_start) {
             echo '<div class="container">';
@@ -372,10 +372,10 @@ class Page {
     }
 
     function print_pager($total = -1, $args = "", $prevargs = "") {
+        if (!$this->settings->show_pager) return;
         $table = $this->table;
         $page = $this->name . ".php";
 
-        if (!$this->settings->show_pager) return;
         if ($total === -1) {
             $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table")->fetch(PDO::FETCH_ASSOC);
             $total = $result['count'];

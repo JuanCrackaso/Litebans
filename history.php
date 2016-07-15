@@ -84,7 +84,7 @@ if ($staffhistory) {
 
 
 $page->print_title();
-$page->print_page_header();
+$page->print_header();
 
 $from = null;
 $from_title = null;
