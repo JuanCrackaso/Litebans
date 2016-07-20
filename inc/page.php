@@ -280,7 +280,7 @@ class Page {
                     $done = true;
                 }
             }
-            if (!$done) {
+            if ($done === false) {
                 $until .= $this->expired[$this->type];
             }
         }
