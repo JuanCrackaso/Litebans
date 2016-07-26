@@ -148,7 +148,7 @@ class Page {
             $selection .= ",CAST(warned AS UNSIGNED) AS warned";
         }
         if ($table !== $this->settings->table['kicks']) {
-            $selection .= ",removed_by_uuid,removed_by_name";
+            $selection .= ",removed_by_uuid,removed_by_name,removed_by_date";
         }
         return $selection;
     }
