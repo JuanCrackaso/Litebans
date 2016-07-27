@@ -280,6 +280,10 @@ class Page {
                     $done = true;
                 }
             }
+            if ($row['removed_by_name'] === "#expired") {
+                $until .= $this->lang->page_expire;
+                $done = true;
+            }
             if ($done === false) {
                 $until .= $this->expired[$this->type];
             }
