@@ -300,7 +300,7 @@ class Page {
         $ts = $millis / 1000;
 
         $result = strftime($this->settings->date_format, $ts);
-        if ($result === "") {
+        if ($result === "" || !is_string($result)) {
             // Fallback to date() if strftime() doesn't work
             return date("F j, Y, g:i A", $ts);
         }
