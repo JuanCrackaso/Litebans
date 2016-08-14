@@ -53,6 +53,7 @@ abstract class Info {
 class BanInfo extends Info {
     function basic_info($row, $player_name) {
         $page = $this->page;
+        
         return array(
             $page->lang->info_banned_player => $this->punished_avatar($player_name, $row),
             $page->lang->info_banned_by     => $this->moderator_avatar($row),
@@ -158,16 +159,23 @@ if ($st->execute(array($id))) {
     }
     $page->print_header();
 
-    $page->table_begin();
     $map = $info->basic_info($row, $player_name);
+
     $permanent_val = $info->page->permanent[$type];
+
+    $page->table_begin();
+
     foreach ($map as $key => $val) {
-        if ($permanent && $key === "Expires" && $val === $permanent_val) {
+        if ($permanent &&
+            ($key === $page->lang->info_banned_expiry || $key === $page->lang->info_muted_expiry || $key === $page->lang->info_warn_expiry) &&
+            $val === $permanent_val) {
             // skip "Expires" row if punishment is permanent
             continue;
         }
         echo "<tr><td>$key</td><td>$val</td></tr>";
     }
+
     $page->table_end(false);
+
     $page->print_footer();
 }
