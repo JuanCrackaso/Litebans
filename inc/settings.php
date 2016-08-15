@@ -61,8 +61,8 @@ final class Settings {
 
         // The date format can be changed here.
         // https://secure.php.net/manual/en/function.strftime.php
-        // Example of default: July 2, 2015, 9:19 PM
-        $this->date_format = '%B %d, %Y, %l:%M %p';
+        // Examples of default: July 2, 2015, 09:19; August 4, 2016, 18:37
+        $this->date_format = '%B %d, %Y, %I:%M';
         date_default_timezone_set("UTC");
 
         // Enable PHP error reporting.
