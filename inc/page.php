@@ -298,12 +298,7 @@ class Page {
      */
     function millis_to_date($millis) {
         $ts = $millis / 1000;
-
         $result = strftime($this->settings->date_format, $ts);
-        if ($result === "" || !is_string($result)) {
-            // Fallback to date() if strftime() doesn't work
-            return date("F j, Y, g:i A", $ts);
-        }
         return $result;
     }
 
