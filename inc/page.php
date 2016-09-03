@@ -209,6 +209,7 @@ class Page {
      * @return null|string
      */
     function get_name($uuid) {
+        if ($uuid === null || $uuid === "" || strrpos($uuid, "#", -strlen($uuid)) !== false) return null;
         if (in_array($uuid, $this->settings->console_aliases)) {
             return $this->settings->console_name;
         }
@@ -383,7 +384,7 @@ class Page {
         $page = $this->name . ".php";
 
         if ($total === -1) {
-            $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table")->fetch(PDO::FETCH_ASSOC);
+            $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table WHERE uuid <> '#offline#' AND uuid IS NOT NULL")->fetch(PDO::FETCH_ASSOC);
             $total = $result['count'];
         }
 
