@@ -114,7 +114,7 @@ class Page {
     function run_query() {
         try {
             $table = $this->table;
-            $active_query = $this->settings->active_query;
+            $where = $this->settings->active_query;
             $limit = $this->settings->limit_per_page;
 
             $offset = 0;
@@ -125,7 +125,14 @@ class Page {
 
             $sel = $this->get_selection($table);
 
-            $query = "SELECT $sel FROM $table $active_query GROUP BY $table.id ORDER BY time DESC LIMIT :limit OFFSET :offset";
+            if ($where !== "") {
+                $where .= " OR ";
+            } else {
+                $where = "WHERE ";
+            }
+            $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
+
+            $query = "SELECT $sel FROM $table $where GROUP BY $table.id ORDER BY time DESC LIMIT :limit OFFSET :offset";
             $st = $this->conn->prepare($query);
 
             $st->bindParam(':offset', $offset, PDO::PARAM_INT);
