@@ -114,7 +114,6 @@ class Page {
     function run_query() {
         try {
             $table = $this->table;
-            $where = $this->settings->active_query;
             $limit = $this->settings->limit_per_page;
 
             $offset = 0;
@@ -125,11 +124,7 @@ class Page {
 
             $sel = $this->get_selection($table);
 
-            if ($where !== "") {
-                $where .= " AND ";
-            } else {
-                $where = "WHERE ";
-            }
+            $where = $this->where_append($this->settings->active_query);
             $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
 
             $query = "SELECT $sel FROM $table $where GROUP BY $table.id ORDER BY time DESC LIMIT :limit OFFSET :offset";
@@ -391,7 +386,10 @@ class Page {
         $page = $this->name . ".php";
 
         if ($total === -1) {
-            $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table WHERE uuid <> '#offline#' AND uuid IS NOT NULL")->fetch(PDO::FETCH_ASSOC);
+            $where = $this->where_append($this->settings->active_query);
+            $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
+
+            $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table $where")->fetch(PDO::FETCH_ASSOC);
             $total = $result['count'];
         }
 
@@ -449,5 +447,17 @@ class Page {
     static function lc_first($str) {
         $str[0] = strtolower($str[0]);
         return (string)$str;
+    }
+
+    /**
+     * @param $where
+     * @return string
+     */
+    public function where_append($where) {
+        if ($where !== "") {
+            return $where . " AND ";
+        } else {
+            return "WHERE ";
+        }
     }
 }
