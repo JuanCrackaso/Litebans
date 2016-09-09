@@ -126,7 +126,7 @@ class Page {
             $sel = $this->get_selection($table);
 
             if ($where !== "") {
-                $where .= " OR ";
+                $where .= " AND ";
             } else {
                 $where = "WHERE ";
             }
