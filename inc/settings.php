@@ -71,6 +71,25 @@ final class Settings {
         // Enable error pages.
         $this->error_pages = true;
 
+        $this->date_month_translations = null;
+
+        /*
+        $this->date_month_translations = array(
+            "January" => "Month 1",
+            "February" => "Month 2",
+            "March" => "Month 3",
+            "April" => "Month 4",
+            "May" => "Month 5",
+            "June" => "Month 6",
+            "July" => "Month 7",
+            "August" => "Month 8",
+            "September" => "Month 9",
+            "October" => "Month 10",
+            "November" => "Month 11",
+            "December" => "Month 12",
+        );
+         */
+
         /*** End of configuration ***/
 
 
@@ -80,15 +99,6 @@ final class Settings {
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
         }
-
-        $this->table = array(
-            'bans'     => "${table_prefix}bans",
-            'mutes'    => "${table_prefix}mutes",
-            'warnings' => "${table_prefix}warnings",
-            'kicks'    => "${table_prefix}kicks",
-            'history'  => "${table_prefix}history",
-            'servers'  => "${table_prefix}servers",
-        );
 
         $this->active_query = "";
 
@@ -100,6 +110,16 @@ final class Settings {
         if (!$this->show_inactive_bans) {
             $this->active_query = "WHERE active=" . Settings::$TRUE;
         }
+
+        // Internal table names, do not translate.
+        $this->table = array(
+            'bans'     => "${table_prefix}bans",
+            'mutes'    => "${table_prefix}mutes",
+            'warnings' => "${table_prefix}warnings",
+            'kicks'    => "${table_prefix}kicks",
+            'history'  => "${table_prefix}history",
+            'servers'  => "${table_prefix}servers",
+        );
 
         $this->driver = $driver;
         if ($connect) {

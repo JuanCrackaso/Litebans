@@ -302,6 +302,12 @@ class Page {
     function millis_to_date($millis) {
         $ts = $millis / 1000;
         $result = strftime($this->settings->date_format, $ts);
+        $translations = $this->settings->date_month_translations;
+        if ($translations !== null) {
+            foreach ($translations as $key => $val) {
+                $result = str_replace($key, $val, $result);
+            }
+        }
         return $result;
     }
 
