@@ -66,7 +66,7 @@ final class Settings {
         date_default_timezone_set("UTC");
 
         // Enable PHP error reporting.
-        $error_reporting = true;
+        $this->error_reporting = true;
 
         // Enable error pages.
         $this->error_pages = true;
@@ -76,7 +76,7 @@ final class Settings {
 
         /** Don't modify anything here unless you know what you're doing **/
 
-        if ($error_reporting) {
+        if ($this->error_reporting) {
             error_reporting(E_ALL);
             ini_set("display_errors", 1);
         }
@@ -141,7 +141,11 @@ final class Settings {
         $message = $e->getMessage();
         if ($settings->error_pages) {
             if (strstr($message, "Access denied for user")) {
-                $settings->redirect("error/access-denied.php?error=" . base64_encode($message));
+                if ($settings->error_reporting) {
+                    $settings->redirect("error/access-denied.php?error=" . base64_encode($message));
+                } else {
+                    $settings->redirect("error/access-denied.php");
+                }
             }
             if (strstr($message, "Base table or view not found:")) {
                 $settings->redirect("error/tables-not-found.php");
@@ -149,6 +153,9 @@ final class Settings {
             if (strstr($message, "Unknown column")) {
                 $settings->redirect("error/outdated-plugin.php");
             }
+        }
+        if ($settings->error_reporting === false) {
+            die("Database error");
         }
         die('Database error: ' . $message);
     }
