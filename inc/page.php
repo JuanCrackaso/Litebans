@@ -124,7 +124,7 @@ class Page {
 
             $sel = $this->get_selection($table);
 
-            $where = $this->where_append($this->settings->active_query);
+            $where = $this->where_append($this->name === "kicks" ? "" : $this->settings->active_query);
             $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
 
             $query = "SELECT $sel FROM $table $where GROUP BY $table.id ORDER BY time DESC LIMIT :limit OFFSET :offset";
@@ -392,7 +392,7 @@ class Page {
         $page = $this->name . ".php";
 
         if ($total === -1) {
-            $where = $this->where_append($this->settings->active_query);
+            $where = $this->where_append($this->name === "kicks" ? "" : $this->settings->active_query);
             $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
 
             $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table $where")->fetch(PDO::FETCH_ASSOC);
