@@ -28,7 +28,6 @@ final class Settings {
         // Clicking on the header name will send you to this address.
         $this->name_link = '#';
 
-
         // Show inactive bans? Removed bans will show (Unbanned), mutes will show (Unmuted), warnings will show (Expired).
         $this->show_inactive_bans = true;
 
