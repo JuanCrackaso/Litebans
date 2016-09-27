@@ -279,7 +279,7 @@ class Page {
                     $name = $this->clean($row['removed_by_name']);
                 }
                 if ($name !== null) {
-                    $until .= str_replace('$name', $name, $this->expired_by[$this->type]);
+                    $until .= str_replace('{name}', $name, $this->expired_by[$this->type]);
                     $done = true;
                 }
             }

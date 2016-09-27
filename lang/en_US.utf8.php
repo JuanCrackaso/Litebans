@@ -16,9 +16,9 @@ class Lang {
         $this->page_perm_mute = 'Permanent Mute';
         $this->page_perm_warn = 'Permanent';
         $this->page_expire_ban = '(Unbanned)';
-        $this->page_expire_ban_by = '(Unbanned by $name)';
+        $this->page_expire_ban_by = '(Unbanned by {name})';
         $this->page_expire_mute = '(Unmuted)';
-        $this->page_expire_mute_by = '(Unmuted by $name)';
+        $this->page_expire_mute_by = '(Unmuted by {name})';
         $this->page_expire = '(Expired)';
         $this->page_title_ban = 'Bans';
         $this->page_title_mute = 'Mutes';
