@@ -7,12 +7,6 @@ final class Settings {
         // Web interface language. Languages are stored in the "lang/" directory.
         $this->lang = 'en_US.utf8';
 
-        // Server name, shown on the main page and on the header
-        $this->name = 'LiteBans';
-
-        // Clicking on the header name will send you to this address.
-        $this->name_link = '#';
-
         // Database information
         $host = 'localhost';
         $port = 3306;
@@ -27,6 +21,13 @@ final class Settings {
 
         // Supported drivers: mysql, pgsql
         $driver = 'mysql';
+
+        // Server name, shown on the main page and on the header
+        $this->name = 'LiteBans';
+
+        // Clicking on the header name will send you to this address.
+        $this->name_link = '#';
+
 
         // Show inactive bans? Removed bans will show (Unbanned), mutes will show (Unmuted), warnings will show (Expired).
         $this->show_inactive_bans = true;
@@ -184,9 +185,7 @@ final class Settings {
 
     function redirect($url) {
         echo "<a href=\"$url\">Redirecting...</a>";
-
         echo "<script type=\"text/javascript\">document.location=\"$url\";</script>";
-
         die;
     }
 }
