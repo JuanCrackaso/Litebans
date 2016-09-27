@@ -90,7 +90,6 @@ final class Settings {
         );
         */
 
-
         /*** End of configuration ***/
 
 
