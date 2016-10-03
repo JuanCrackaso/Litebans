@@ -10,8 +10,8 @@ $page->print_check_form();
 
 $page->table_begin();
 
-$result = $page->run_query();
-while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+$rows = $page->run_query();
+foreach ($rows as $row) {
     $player_name = $page->get_name($row['uuid']);
     if ($player_name === null) continue;
 

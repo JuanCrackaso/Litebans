@@ -135,9 +135,11 @@ class Page {
 
             $st->execute();
 
+            $rows = $st->fetchAll();
+
             $st->closeCursor();
 
-            return $st;
+            return $rows;
         } catch (PDOException $ex) {
             Settings::handle_error($this->settings, $ex);
         }
@@ -221,12 +223,16 @@ class Page {
 
         $history = $this->settings->table['history'];
         $stmt = $this->conn->prepare("SELECT name FROM $history WHERE uuid=? ORDER BY date DESC LIMIT 1");
+        $result = null;
+
         if ($stmt->execute(array($uuid)) && $row = $stmt->fetch()) {
-            $banner = $row['name'];
-            $this->uuid_name_cache[$uuid] = $banner;
-            return $banner;
+            $name = $row['name'];
+            $this->uuid_name_cache[$uuid] = $name;
+            $result = $name;
         }
         $stmt->closeCursor();
+        if ($result !== null) return $result;
+
         $this->uuid_name_cache[$uuid] = null;
         return null;
     }
