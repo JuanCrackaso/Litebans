@@ -231,10 +231,9 @@ class Page {
             $result = $name;
         }
         $stmt->closeCursor();
-        if ($result !== null) return $result;
 
-        $this->uuid_name_cache[$uuid] = null;
-        return null;
+        $this->uuid_name_cache[$uuid] = $result;
+        return $result;
     }
 
     /**
