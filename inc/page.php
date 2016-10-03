@@ -221,14 +221,12 @@ class Page {
         }
         if (array_key_exists($uuid, $this->uuid_name_cache)) return $this->uuid_name_cache[$uuid];
 
-        $history = $this->settings->table['history'];
-        $stmt = $this->conn->prepare("SELECT name FROM $history WHERE uuid=? ORDER BY date DESC LIMIT 1");
         $result = null;
+        $history = $this->settings->table['history'];
 
+        $stmt = $this->conn->prepare("SELECT name FROM $history WHERE uuid=? ORDER BY date DESC LIMIT 1");
         if ($stmt->execute(array($uuid)) && $row = $stmt->fetch()) {
-            $name = $row['name'];
-            $this->uuid_name_cache[$uuid] = $name;
-            $result = $name;
+            $result = $row['name'];
         }
         $stmt->closeCursor();
 
