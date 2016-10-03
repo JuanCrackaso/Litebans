@@ -135,6 +135,8 @@ class Page {
 
             $st->execute();
 
+            $st->closeCursor();
+
             return $st;
         } catch (PDOException $ex) {
             Settings::handle_error($this->settings, $ex);
@@ -224,6 +226,7 @@ class Page {
             $this->uuid_name_cache[$uuid] = $banner;
             return $banner;
         }
+        $stmt->closeCursor();
         $this->uuid_name_cache[$uuid] = null;
         return null;
     }

@@ -19,6 +19,7 @@ class Check {
                     $uuid = $row['uuid'];
                 }
             }
+            $stmt->closeCursor();
             if (!isset($uuid)) {
                 $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
                 $this->println("$name " . $page->lang->check_notjoin);
@@ -58,6 +59,7 @@ class Check {
                     $this->println("Banned permanently.");
                 }
             }
+            $stmt->closeCursor();
             */
         } catch (PDOException $ex) {
             Settings::handle_error($page->settings, $ex);

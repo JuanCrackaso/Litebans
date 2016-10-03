@@ -20,6 +20,7 @@ class History {
         if ($count_st->execute() && ($row = $count_st->fetch()) !== null) {
             $counts[$type] = $row['count'];
         }
+        $count_st->closeCursor();
         $sel = $page->get_selection($table);
 
         $limit = $page->settings->limit_per_page;
@@ -37,6 +38,7 @@ class History {
                 array_push($array, $row);
             }
         }
+        $st->closeCursor();
     }
 
     /**

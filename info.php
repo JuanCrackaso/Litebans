@@ -53,7 +53,7 @@ abstract class Info {
 class BanInfo extends Info {
     function basic_info($row, $player_name) {
         $page = $this->page;
-        
+
         return array(
             $page->lang->info_banned_player => $this->punished_avatar($player_name, $row),
             $page->lang->info_banned_by     => $this->moderator_avatar($row),
@@ -179,3 +179,4 @@ if ($st->execute(array($id))) {
 
     $page->print_footer();
 }
+$st->closeCursor();
