@@ -132,6 +132,7 @@ $st = $page->conn->prepare($query);
 
 if ($st->execute(array($id))) {
     ($row = $st->fetch()) or die($page->lang->info_error_notfound1 . $type . $page->lang->info_error_notfound2);
+    $st->closeCursor();
 
     $player_name = $page->get_name($row['uuid']);
 
@@ -168,7 +169,8 @@ if ($st->execute(array($id))) {
     foreach ($map as $key => $val) {
         if ($permanent &&
             ($key === $page->lang->info_banned_expiry || $key === $page->lang->info_muted_expiry || $key === $page->lang->info_warn_expiry) &&
-            $val === $permanent_val) {
+            $val === $permanent_val
+        ) {
             // skip "Expires" row if punishment is permanent
             continue;
         }
@@ -179,4 +181,3 @@ if ($st->execute(array($id))) {
 
     $page->print_footer();
 }
-$st->closeCursor();
