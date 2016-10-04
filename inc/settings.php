@@ -143,6 +143,7 @@ final class Settings {
 
                 $st = $this->conn->query("SELECT * FROM " . $this->table['servers'] . " LIMIT 1;");
                 $st->fetch();
+                $st->closeCursor();
             } catch (PDOException $e) {
                 Settings::handle_error($this, $e);
             }

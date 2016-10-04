@@ -401,7 +401,9 @@ class Page {
             $where = $this->where_append($this->name === "kicks" ? "" : $this->settings->active_query);
             $where .= "(uuid <> '#offline#' AND uuid IS NOT NULL)";
 
-            $result = $this->conn->query("SELECT COUNT(*) AS count FROM $table $where")->fetch(PDO::FETCH_ASSOC);
+            $st = $this->conn->query("SELECT COUNT(*) AS count FROM $table $where");
+            $result = $st->fetch(PDO::FETCH_ASSOC);
+            $st->closeCursor();
             $total = $result['count'];
         }
 

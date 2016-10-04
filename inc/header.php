@@ -19,6 +19,7 @@ function __construct($page) {
             (SELECT COUNT(*) FROM $t_warnings) AS c_warnings,
             (SELECT COUNT(*) FROM $t_kicks) AS c_kicks");
             ($row = $st->fetch(PDO::FETCH_ASSOC)) or die('Failed to fetch row counts.');
+            $st->closeCursor();
             $this->count = array(
                 'bans.php'     => $row['c_bans'],
                 'mutes.php'    => $row['c_mutes'],
