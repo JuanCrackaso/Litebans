@@ -160,7 +160,7 @@ if ($st->execute(array($id))) {
             $header .= "<span $style class='label label-danger'>Permanent</span>";
         }
     }
-    $page->print_header($header);
+    $page->print_header(true, $header);
 
     $map = $info->basic_info($row, $player_name);
 
