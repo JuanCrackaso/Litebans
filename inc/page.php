@@ -367,8 +367,10 @@ class Page {
         echo "<tbody>";
     }
 
-    function print_header($container_start = true) {
-        $title = $this->title;
+    function print_header($container_start = true, $title = null) {
+        if ($title === null) {
+            $title = $this->title;
+        }
         if ($container_start) {
             echo '<div class="container">';
         }

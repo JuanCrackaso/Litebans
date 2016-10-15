@@ -146,19 +146,21 @@ if ($st->execute(array($id))) {
     $page->name = $page->title = "$name #$id";
     $page->print_title();
 
+    $header = $page->name;
+
     if (!($info instanceof KickInfo)) {
         $style = 'style="margin-left: 13px; font-size: 16px;"';
         $active = $page->active($row);
         if ($active === true) {
-            $page->name .= "<span $style class='label label-danger'>Active</span>";
+            $header .= "<span $style class='label label-danger'>Active</span>";
         } else {
-            $page->name .= "<span $style class='label label-warning'>Inactive</span>";
+            $header .= "<span $style class='label label-warning'>Inactive</span>";
         }
         if ($permanent) {
-            $page->name .= "<span $style class='label label-danger'>Permanent</span>";
+            $header .= "<span $style class='label label-danger'>Permanent</span>";
         }
     }
-    $page->print_header();
+    $page->print_header($header);
 
     $map = $info->basic_info($row, $player_name);
 
