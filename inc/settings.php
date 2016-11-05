@@ -8,8 +8,8 @@ final class Settings {
         $this->lang = 'en_US.utf8';
 
         // Database information
-        $host = 'localhost';
-        $port = 3306;
+        $this->host = 'localhost';
+        $this->port = 3306;
 
         $database = 'litebans';
 
@@ -17,7 +17,7 @@ final class Settings {
         $password = '';
 
         // If you set a table prefix in config.yml, set it here as well
-        $table_prefix = "litebans_";
+        $this->table_prefix = "litebans_";
 
         // Supported drivers: mysql, pgsql
         $driver = 'mysql';
@@ -110,6 +110,7 @@ final class Settings {
         if (!$this->show_inactive_bans) {
             $this->active_query = "WHERE active=" . Settings::$TRUE;
         }
+        $table_prefix = $this->table_prefix;
 
         // Internal table names, do not translate.
         $this->table = array(
@@ -126,6 +127,8 @@ final class Settings {
             if ($username === "" && $password === "") {
                 $this->redirect("error/unconfigured.php");
             }
+            $host = $this->host;
+            $port = $this->port;
 
             $dsn = "$driver:dbname=$database;host=$host;port=$port";
             if ($driver === 'mysql') {
