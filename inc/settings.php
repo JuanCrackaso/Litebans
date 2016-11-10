@@ -61,7 +61,7 @@ final class Settings {
 
         // The date format can be changed here.
         // https://secure.php.net/manual/en/function.strftime.php
-        // Examples of default: July 2, 2015, 09:19; August 4, 2016, 18:37
+        // Example output of default format: July 2, 2015, 09:19; August 4, 2016, 18:37
         $this->date_format = '%B %d, %Y, %R';
         date_default_timezone_set("UTC");
 
@@ -110,6 +110,32 @@ final class Settings {
         if (!$this->show_inactive_bans) {
             $this->active_query = "WHERE active=" . Settings::$TRUE;
         }
+
+        // test strftime
+        $fail = false;
+        $test = strftime($this->date_format, 0);
+        if ($test == false) {
+            ob_start();
+            var_dump($test);
+            $testdump = ob_get_clean();
+            echo("Error: date_format test failed. strftime(\"" . $this->date_format . "\",0) returned " . $testdump);
+            $fail = true;
+        }
+
+        $test = strftime("%B %d, %Y, %R", 0);
+        if ($test !== "January 01, 1970, 00:00") {
+            ob_start();
+            var_dump($test);
+            $testdump = ob_get_clean();
+            echo("Assertion failed: strftime(\"%B %d, %Y, %R\",0) != \"January 01, 1970, 00:00\"<br>");
+            echo("Actual result: " . $testdump);
+            $fail = true;
+        }
+
+        if ($fail === true) {
+            die;
+        }
+
         $table_prefix = $this->table_prefix;
 
         // Internal table names, do not translate.
