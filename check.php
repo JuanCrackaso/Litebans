@@ -20,21 +20,29 @@ class Check {
                 }
             }
             $stmt->closeCursor();
+
+            // sanitize $_POST['table'] ($from)
+            $from_type = $page->type_info($from);
+            $type = $from_type['type'];
+
             if (!isset($uuid)) {
+                if (filter_var($name, FILTER_VALIDATE_FLOAT)) {
+                    echo "<br>";
+                    $page->settings->redirect("info.php?id=$name&type=$type", false);
+                    return;
+                }
                 $name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
                 $this->println("$name " . $page->lang->check_notjoin);
                 return;
             }
             $href = "history.php?uuid=$uuid";
 
-            // sanitize $_POST['table'] ($from)
-            $from_type = $page->type_info($from);
-            $type = $from_type['type'];
             if ($type !== null) {
                 $href .= "&from=" . Page::lc_first($from_type['title']);
             }
 
-            echo "<br><script data-cfasync=\"false\" type=\"text/javascript\">document.location.href=\"$href\";</script>";
+            echo "<br>";
+            $page->settings->redirect($href, false);
             /*
             $table = $page->settings->table['bans'];
 

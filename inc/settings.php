@@ -211,9 +211,11 @@ final class Settings {
     }
 
 
-    function redirect($url) {
-        echo "<a href=\"$url\">Redirecting...</a>";
-        echo "<script type=\"text/javascript\">document.location=\"$url\";</script>";
+    function redirect($url, $showtext = true) {
+        if ($showtext === true) {
+            echo "<a href=\"$url\">Redirecting...</a>";
+        }
+        echo "<script data-cfasync=\"false\" type=\"text/javascript\">document.location=\"$url\";</script>";
         die;
     }
 }
