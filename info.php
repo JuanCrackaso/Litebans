@@ -153,11 +153,11 @@ if ($st->execute(array($id))) {
         $active = $page->active($row);
         if ($active === true) {
             $header .= "<span $style class='label label-danger'>Active</span>";
+            if ($permanent) {
+                $header .= "<span $style class='label label-danger'>Permanent</span>";
+            }
         } else {
             $header .= "<span $style class='label label-warning'>Inactive</span>";
-        }
-        if ($permanent) {
-            $header .= "<span $style class='label label-danger'>Permanent</span>";
         }
     }
     $page->print_header(true, $header);
