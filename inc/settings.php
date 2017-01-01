@@ -122,12 +122,12 @@ final class Settings {
             $fail = true;
         }
 
-        $test = strftime("%B %d, %Y, %R", 0);
-        if ($test !== "January 01, 1970, 00:00") {
+        $test = strftime("%F %T", 0);
+        if ($test !== "1970-01-01 00:00:00") {
             ob_start();
             var_dump($test);
             $testdump = ob_get_clean();
-            echo("Assertion failed: strftime(\"%B %d, %Y, %R\",0) != \"January 01, 1970, 00:00\"<br>");
+            echo("Assertion failed: strftime(\"%F %T\",0) != \"1970-01-01 00:00:00\"<br>");
             echo("Actual result: " . $testdump);
             $fail = true;
         }
