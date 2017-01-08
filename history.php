@@ -79,9 +79,9 @@ $name = $page->get_name($uuid);
 $name !== null or die($page->lang->history_playernotfound);
 
 if ($staffhistory) {
-    $page->name = $page->lang->history_recentby . $name;
+    $page->title = $page->lang->history_recentby . $name;
 } else {
-    $page->name = $page->lang->history_recentfor . $name;
+    $page->title = $page->lang->history_recentfor . $name;
 }
 
 
