@@ -63,7 +63,9 @@ final class Settings {
         // https://secure.php.net/manual/en/function.strftime.php
         // Example output of default format: July 2, 2015, 09:19; August 4, 2016, 18:37
         $this->date_format = '%B %d, %Y, %R';
-        date_default_timezone_set("UTC");
+
+        // https://secure.php.net/manual/en/timezones.php
+        $timezone = "UTC";
 
         // Enable PHP error reporting.
         $this->error_reporting = true;
@@ -111,7 +113,11 @@ final class Settings {
             $this->active_query = "WHERE active=" . Settings::$TRUE;
         }
 
+
         // test strftime
+
+        date_default_timezone_set("UTC"); // temporarily set UTC timezone for testing purposes
+
         $fail = false;
         $test = strftime($this->date_format, 0);
         if ($test == false) {
@@ -135,6 +141,8 @@ final class Settings {
         if ($fail === true) {
             die;
         }
+
+        date_default_timezone_set($timezone); // set configured timezone
 
         $table_prefix = $this->table_prefix;
 
