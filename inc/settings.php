@@ -62,7 +62,7 @@ final class Settings {
         // The date format can be changed here.
         // https://secure.php.net/manual/en/function.strftime.php
         // Example output of default format: July 2, 2015, 09:19; August 4, 2016, 18:37
-        $this->date_format = '%B %d, %Y, %R';
+        $this->date_format = '%B %d, %Y, %H:%M';
 
         // https://secure.php.net/manual/en/timezones.php
         $timezone = "UTC";
@@ -128,7 +128,7 @@ final class Settings {
             $fail = true;
         }
 
-        $test = strftime("%F %T", 0);
+        $test = strftime("%F %H:%M:%S", 0);
         if ($test !== "1970-01-01 00:00:00") {
             ob_start();
             var_dump($test);
