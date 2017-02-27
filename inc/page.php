@@ -243,7 +243,7 @@ class Page {
     function clean($text) {
         if ($text === null) return null;
         if (strstr($text, "\xa7") || strstr($text, "&")) {
-            $text = preg_replace("/(?i)(\xa7|&)[0-9A-FK-OR]/", "", $text);
+            $text = preg_replace("/(?i)(\u{00a7}|&)[0-9A-FK-OR]/u", "", $text);
         }
         $text = htmlspecialchars($text, ENT_QUOTES, "UTF-8");
         if (strstr($text, "\n")) {
