@@ -133,7 +133,7 @@ final class Settings {
             ob_start();
             var_dump($test);
             $testdump = ob_get_clean();
-            echo("Assertion failed: strftime(\"%Y-%m-%d %H:%M\",0) != \"1970-01-01 00:00:00\"<br>");
+            echo("Assertion failed: strftime(\"%Y-%m-%d %H:%M\",0) != \"1970-01-01 00:00\"<br>");
             echo("Actual result: " . $testdump);
             $fail = true;
         }
