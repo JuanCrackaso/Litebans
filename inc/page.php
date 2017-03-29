@@ -2,7 +2,6 @@
 
 class Page {
     public function __construct($name, $header = true) {
-        header('Content-Type: text/html; charset=UTF-8');
 //        ini_set('mbstring.internal_encoding', 'UTF-8');
         ini_set('default_charset', 'utf-8');
         require_once './inc/settings.php';
