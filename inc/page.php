@@ -185,7 +185,7 @@ class Page {
         if ($name_under) {
             return "<p align='center'><img class='avatar noselect' src='$src'/><br>$name</p>";
         }
-        return "<img class='avatar noselect' src='$src'/>$name";
+        return "<p align='left'><img class='avatar noselect' src='$src'/>$name</p>";
     }
 
     /**
