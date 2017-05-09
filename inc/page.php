@@ -160,13 +160,9 @@ class Page {
 
     /**
      * Returns HTML representing the Minecraft avatar for a specific name or UUID.
-     * @param $name
-     * @param $uuid
-     * @param bool $name_under
-     * @param string $name_repl
      * @return string
      */
-    function get_avatar($name, $uuid, $name_under = true, $name_repl = null) {
+    function get_avatar($name, $uuid, $name_under = true, $name_repl = null, $name_left = true) {
         if ($name_under) {
             $name_under = $this->settings->avatar_names_below;
         }
@@ -182,10 +178,14 @@ class Page {
         if ($name_repl !== null) {
             $name = $name_repl;
         }
+        $str = "<img class='avatar noselect' src='$src'/>$name";
         if ($name_under) {
-            return "<p align='center'><img class='avatar noselect' src='$src'/><br>$name</p>";
+            return "<p align='center'>$str</p>";
         }
-        return "<p align='left'><img class='avatar noselect' src='$src'/>$name</p>";
+        if ($name_left) {
+            return "<p align='left'>$str</p>";
+        }
+        return $str;
     }
 
     /**
