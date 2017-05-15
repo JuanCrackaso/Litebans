@@ -349,7 +349,7 @@ class Page {
             }
             $a = "a";
             if ($header === $this->lang->warns_receive) {
-                $icon = ($text !== $this->lang->warns_no) ? "glyphicon-ok" : "glyphicon-remove";
+                $icon = ($text !== "0") ? "glyphicon-ok" : "glyphicon-remove";
                 $a .= " class=\"glyphicon $icon\" aria-hidden=true";
                 $text = "";
             }

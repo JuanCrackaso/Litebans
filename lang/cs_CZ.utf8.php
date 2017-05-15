@@ -84,7 +84,5 @@ class Lang {
         $this->warns_reason = "Důvod varování";
         $this->warns_when = "Varován kdy";
         $this->warns_receive = "Varování doručeno";
-        $this->warns_yes = "Ano";
-        $this->warns_no = "Ne";
     }
 }

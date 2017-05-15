@@ -20,7 +20,7 @@ foreach ($rows as $row) {
         $page->lang->warns_by      => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
         $page->lang->warns_reason  => $page->clean($row['reason']),
         $page->lang->warns_when    => $page->expiry($row),
-        $page->lang->warns_receive => (($page->active($row, 'warned') === true) ? $page->lang->warns_yes : $page->lang->warns_no),
+        $page->lang->warns_receive => (($page->active($row, 'warned') === true) ? "1" : "0"),
     ));
 }
 $page->table_end();

@@ -84,8 +84,6 @@ class Lang {
         $this->warns_reason = "理由";
         $this->warns_when = "日時";
         $this->warns_receive = "受け取った警告";
-        $this->warns_yes = "Yes";
-        $this->warns_no = "No";
 
         // Errors which are only accessible from invalid user input or removed pages.
         $this->check_invalid = "プレイヤー名が無効です";

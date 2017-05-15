@@ -84,8 +84,6 @@ class Lang {
         $this->warns_reason = "Advaret Fordi";
         $this->warns_when = "Advaret Indtil";
         $this->warns_receive = "Modtog Advarelse";
-        $this->warns_yes = "Ja";
-        $this->warns_no = "Nej";
 
         // Errors which are only accessible from invalid user input or removed pages.
         $this->check_invalid = "Ugyldigt Navn.";

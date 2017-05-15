@@ -82,8 +82,6 @@ class Lang {
         $this->warns_reason = "Razón";
         $this->warns_when = "Advertido el";
         $this->warns_receive = "¿Advertencia Recibida?";
-        $this->warns_yes = "Sí";
-        $this->warns_no = "No";
 
         // Errors which are only accessible from invalid user input or removed pages.
         $this->check_invalid = "Nombre Inválido.";
