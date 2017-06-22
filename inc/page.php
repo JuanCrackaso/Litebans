@@ -171,7 +171,7 @@ class Page {
             $uuid = $name;
         }
         $src = str_replace('$NAME', $name, str_replace('$UUID', $uuid, $this->settings->avatar_source));
-        if (in_array($name, $this->settings->console_aliases)) {
+        if (in_array($name, $this->settings->console_aliases) || $name === $this->settings->console_name) {
             $src = $this->settings->console_image;
             $name = $this->settings->console_name;
         }
