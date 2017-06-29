@@ -267,8 +267,8 @@ class Page {
         } else {
             $until = $this->millis_to_date($row['until']);
         }
+        $expired = $this->is_expired($row);
         if ($this->active($row) === false) {
-            $until .= ' ';
 
             $done = false;
 
@@ -284,17 +284,20 @@ class Page {
                     $name = $this->clean($row['removed_by_name']);
                 }
                 if ($name !== null) {
-                    $until .= str_replace('{name}', $name, $this->expired_by[$this->type]);
+                    $until .= ' ' . str_replace('{name}', $name, $this->expired_by[$this->type]);
                     $done = true;
                 }
             }
-            if ($this->is_expired($row)) {
-                $until .= $this->lang->page_expire;
+            if ($expired) {
                 $done = true;
             }
             if ($done === false) {
-                $until .= $this->expired[$this->type];
+                $until .= ' ' . $this->expired[$this->type];
             }
+        }
+        if ($expired) {
+            $until .= ' ';
+            $until .= $this->lang->page_expire;
         }
         return $until;
     }
