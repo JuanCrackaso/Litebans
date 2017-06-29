@@ -178,8 +178,10 @@ class Page {
         if ($name_repl !== null) {
             $name = $name_repl;
         }
-        $str = "<img class='avatar noselect' src='$src'/>$name";
+        $img = "<img class='avatar noselect' src='$src'/>";
+        $str = "{$img}$name";
         if ($name_under) {
+            $str = "{$img}<br>$name";
             return "<p align='center'>$str</p>";
         }
         if ($name_left) {
