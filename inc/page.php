@@ -288,7 +288,7 @@ class Page {
                     $done = true;
                 }
             }
-            if ($row['removed_by_name'] === "#expired") {
+            if ($this->is_expired($row)) {
                 $until .= $this->lang->page_expire;
                 $done = true;
             }
@@ -318,6 +318,22 @@ class Page {
 
     function active($row, $field = 'active') {
         return (((int)$row[$field]) !== 0);
+    }
+
+    function is_expired($row) {
+        if ($row['removed_by_name'] === "#expired") return true;
+
+        $until = $row['until'];
+
+        if ($until <= 0) return false;
+
+        $time = gettimeofday();
+        $millis = $time["sec"] * 1000;
+
+        if ($millis > $until) {
+            return true;
+        }
+        return false;
     }
 
     function print_title() {
