@@ -321,7 +321,9 @@ class Page {
     }
 
     function is_expired($row) {
-        if ($row['removed_by_name'] === "#expired") return true;
+        $removed_by_name = $row['removed_by_name'];
+        if ($removed_by_name === "#expired") return true;
+        if ($removed_by_name !== null && $removed_by_name !== "") return false;
 
         $until = $row['until'];
 
