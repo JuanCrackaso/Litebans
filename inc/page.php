@@ -334,9 +334,11 @@ class Page {
 
         if ($until <= 0) return false;
 
-        $dtz = new DateTimeZone(date_default_timezone_get());
-        $dt = new DateTime("now", $dtz);
-        $millis = ($dt->getTimestamp() + $dt->getOffset()) * 1000;
+        $time = gettimeofday();
+        $millis = $time["sec"] * 1000;
+//        $dtz = new DateTimeZone(date_default_timezone_get());
+//        $dt = new DateTime("now", $dtz);
+//        $millis = ($dt->getTimestamp() + $dt->getOffset()) * 1000;
 
         if ($millis > $until) {
             return true;
