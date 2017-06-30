@@ -35,7 +35,7 @@ abstract class Info {
     }
 
     function punished_avatar($player_name, $row) {
-        return $this->page->get_avatar($player_name, $row['uuid'], false, $this->history_link($player_name, $row['uuid']), $name_left = false);
+        return $this->page->get_avatar($player_name, $row['uuid'], true, $this->history_link($player_name, $row['uuid']), $name_left = false);
     }
 
     function history_link($player_name, $uuid, $args = "") {
@@ -44,7 +44,7 @@ abstract class Info {
 
     function moderator_avatar($row) {
         $banner_name = $this->page->get_banner_name($row);
-        return $this->page->get_avatar($banner_name, $row['banned_by_uuid'], false, $this->history_link($banner_name, $row['banned_by_uuid'], "&staffhistory=1"), $name_left = false);
+        return $this->page->get_avatar($banner_name, $row['banned_by_uuid'], true, $this->history_link($banner_name, $row['banned_by_uuid'], "&staffhistory=1"), $name_left = false);
     }
 
     abstract function basic_info($row, $player_name);
