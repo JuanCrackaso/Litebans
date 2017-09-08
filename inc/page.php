@@ -168,7 +168,9 @@ class Page {
         }
         if (strlen($uuid) === 36 && $uuid[14] === '3') {
             // Avatars cannot be associated with offline mode UUIDs (version 3)
-            $uuid = $name;
+            if (!$this->settings->avatar_allow_offline_mode_uuids) {
+                $uuid = $name;
+            }
         }
         $src = str_replace('$NAME', $name, str_replace('$UUID', $uuid, $this->settings->avatar_source));
         if (in_array($name, $this->settings->console_aliases) || $name === $this->settings->console_name) {

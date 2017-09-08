@@ -56,6 +56,9 @@ final class Settings {
         // If enabled, names will be shown below avatars instead of being shown next to them.
         $this->avatar_names_below = true;
 
+        // If enabled, offline-mode UUIDs will be requested from avatar_source instead of player names.
+        $this->avatar_allow_offline_mode_uuids = false;
+
         // If enabled, the total amount of bans, mutes, warnings, and kicks will be shown next to the buttons in the header.
         $this->header_show_totals = true;
 
