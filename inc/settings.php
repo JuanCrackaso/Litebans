@@ -157,6 +157,7 @@ final class Settings {
             'kicks'    => "${table_prefix}kicks",
             'history'  => "${table_prefix}history",
             'servers'  => "${table_prefix}servers",
+            'config'   => "${table_prefix}config",
         );
 
         $this->driver = $driver;
@@ -181,7 +182,7 @@ final class Settings {
             try {
                 $this->conn = new PDO($dsn, $username, $password, $options);
 
-                $st = $this->conn->query("SELECT * FROM " . $this->table['servers'] . " LIMIT 1;");
+                $st = $this->conn->query("SELECT * FROM " . $this->table['config'] . " LIMIT 1;");
                 $st->fetch();
                 $st->closeCursor();
             } catch (PDOException $e) {
