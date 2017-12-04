@@ -21,6 +21,7 @@ foreach ($rows as $row) {
         $page->t("warns_reason")  => $page->clean($row['reason']),
         $page->t("warns_when")    => $page->expiry($row),
         $page->t("warns_receive") => (($page->active($row, 'warned') === true) ? "1" : "0"),
+        $page->t("column_server") => $page->server($row),
     ));
 }
 $page->table_end();

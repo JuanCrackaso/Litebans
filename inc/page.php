@@ -272,6 +272,16 @@ class Page {
         return $text;
     }
 
+    function server($row, $col = "server_scope") {
+        $server = $this->clean($row[$col]);
+        if ($server === null) {
+            return "-";
+        }
+        if ($server === "*") {
+            return $this->t("column_server_global");
+        }
+        return $server;
+    }
 
     /**
      * Returns a string that shows the expiry date of a punishment.

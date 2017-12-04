@@ -170,6 +170,7 @@ try {
                 $page->t("history_tablereason")    => $page->clean($row['reason']),
                 $page->t("history_tabledate")      => $page->millis_to_date($row['time']),
                 $page->t("history_tableexpires")   => $page->expiry($row),
+                $page->t("column_server")          => $page->server($row),
                 //'i' => $i . "/" . $limit . "/" . $total,
             ));
         }

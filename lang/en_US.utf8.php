@@ -86,6 +86,9 @@ class DefaultLang {
         $array["warns_when"] = "Warned Until";
         $array["warns_receive"] = "Received Warning";
 
+        $array["column_server"] = "Server";
+        $array["column_server_global"] = "*";
+
         // Errors which are only accessible from invalid user input or removed pages.
         $array["check_invalid"] = "Invalid name.";
         $array["history_missinguuid"] = "Missing arguments (uuid).";

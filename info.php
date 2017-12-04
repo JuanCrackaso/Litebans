@@ -60,6 +60,7 @@ class BanInfo extends Info {
             $page->t("info_banned_reason") => $page->clean($row['reason']),
             $page->t("info_banned_when")   => $page->millis_to_date($row['time']),
             $page->t("info_banned_expiry") => $page->expiry($row),
+            $page->t("column_server")      => $page->server($row),
         );
     }
 }
@@ -73,6 +74,7 @@ class MuteInfo extends Info {
             $page->t("info_muted_reason") => $page->clean($row['reason']),
             $page->t("info_muted_when")   => $page->millis_to_date($row['time']),
             $page->t("info_muted_expiry") => $page->expiry($row),
+            $page->t("column_server")     => $page->server($row),
         );
     }
 }
@@ -90,6 +92,7 @@ class WarnInfo extends Info {
             $page->t("info_warn_reason") => $page->clean($row['reason']),
             $page->t("info_warn_when")   => $page->millis_to_date($row['time']),
             $page->t("info_warn_expiry") => $page->expiry($row),
+            $page->t("column_server")    => $page->server($row),
         );
     }
 }
@@ -102,6 +105,7 @@ class KickInfo extends Info {
             $page->t("info_kick_by")     => $this->moderator_avatar($row),
             $page->t("info_kick_reason") => $page->clean($row['reason']),
             $page->t("info_kick_when")   => $page->millis_to_date($row['time']),
+            $page->t("column_server")    => $page->server($row),
         );
     }
 }
