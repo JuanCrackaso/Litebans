@@ -7,9 +7,16 @@ class Page {
         require_once './inc/settings.php';
         $settings = new Settings();
         setlocale(LC_ALL, $settings->lang);
+
+        require_once './lang/en_US.utf8.php';
+        $this->defaultlang = new DefaultLang();
+
         require_once './lang/' . $settings->lang . '.php';
-        $lang = new Lang();
-        $this->lang = $lang;
+        if (class_exists("Lang")) {
+            $this->lang = new Lang();
+        } else {
+            $this->lang = $this->defaultlang;
+        }
 
         $this->time = microtime(true);
         if ($header) {
@@ -35,21 +42,21 @@ class Page {
         $this->set_info($info);
 
         $this->permanent = array(
-            'ban'  => $this->lang->page_perm_ban,
-            'mute' => $this->lang->page_perm_mute,
-            'warn' => $this->lang->page_perm_warn,
+            'ban'  => $this->t("page_perm_ban"),
+            'mute' => $this->t("page_perm_mute"),
+            'warn' => $this->t("page_perm_warn"),
             'kick' => null,
         );
         $this->expired = array(
-            'ban'  => $this->lang->page_expire_ban,
-            'mute' => $this->lang->page_expire_mute,
-            'warn' => $this->lang->page_expire,
+            'ban'  => $this->t("page_expire_ban"),
+            'mute' => $this->t("page_expire_mute"),
+            'warn' => $this->t("page_expire"),
             'kick' => null,
         );
         $this->expired_by = array(
-            'ban'  => $this->lang->page_expire_ban_by,
-            'mute' => $this->lang->page_expire_mute_by,
-            'warn' => $this->lang->page_expire,
+            'ban'  => $this->t("page_expire_ban_by"),
+            'mute' => $this->t("page_expire_mute_by"),
+            'warn' => $this->t("page_expire"),
             'kick' => null,
         );
 
@@ -61,6 +68,16 @@ class Page {
         $this->table_headers_printed = false;
     }
 
+    public function t($str) {
+        if (array_key_exists($str, $this->lang->array)) {
+            return $this->lang->array[$str];
+        }
+        if (array_key_exists($str, $this->defaultlang->array)) {
+            return $this->defaultlang->array[$str];
+        }
+        return "404";
+    }
+
     public function type_info($type) {
         $settings = $this->settings;
         switch ($type) {
@@ -69,28 +86,28 @@ class Page {
                 return array(
                     "type"  => "ban",
                     "table" => $settings->table['bans'],
-                    "title" => $this->lang->page_title_ban,
+                    "title" => $this->t("page_title_ban"),
                 );
             case "mute":
             case "mutes":
                 return array(
                     "type"  => "mute",
                     "table" => $settings->table['mutes'],
-                    "title" => $this->lang->page_title_mute,
+                    "title" => $this->t("page_title_mute"),
                 );
             case "warn":
             case "warnings":
                 return array(
                     "type"  => "warn",
                     "table" => $settings->table['warnings'],
-                    "title" => $this->lang->page_title_warn,
+                    "title" => $this->t("page_title_warn"),
                 );
             case "kick":
             case "kicks":
                 return array(
                     "type"  => "kick",
                     "table" => $settings->table['kicks'],
-                    "title" => $this->lang->page_title_kick,
+                    "title" => $this->t("page_title_kick"),
                 );
             default:
                 return array(
@@ -255,6 +272,7 @@ class Page {
         return $text;
     }
 
+
     /**
      * Returns a string that shows the expiry date of a punishment.
      * If the punishment does not expire, it will be shown as permanent.
@@ -301,7 +319,7 @@ class Page {
         }
         if ($expired) {
             $until .= ' ';
-            $until .= $this->lang->page_expire;
+            $until .= $this->t("page_expire");
         }
         return $until;
     }
@@ -369,14 +387,14 @@ class Page {
         echo "<tr>";
         foreach ($array as $header => $text) {
             $style = "";
-            if ($header === $this->lang->bans_reason || $header === $this->lang->mutes_reason || $header === $this->lang->warns_reason || $header == $this->lang->kicks_reason) {
+            if ($header === $this->t("bans_reason") || $header === $this->t("mutes_reason") || $header === $this->t("warns_reason") || $header == $this->t("kicks_reason")) {
                 $style = "style=\"width: 30%;\"";
                 if ($text === "") {
                     $text = "-";
                 }
             }
             $a = "a";
-            if ($header === $this->lang->warns_receive) {
+            if ($header === $this->t("warns_receive")) {
                 $icon = ($text !== "0") ? "glyphicon-ok" : "glyphicon-remove";
                 $a .= " class=\"glyphicon $icon\" aria-hidden=true";
                 $text = "";
@@ -413,7 +431,7 @@ class Page {
         echo '
          <div style="text-align: left;" class="row">
              <div style="margin-left: 15px;">
-                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="' . $this->lang->page_check_user . '"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">' . $this->lang->page_check_submit . '</button></form>
+                 <form onsubmit="captureForm(event);" class="form-inline"><div class="form-group"><input type="text" class="form-control" id="user" placeholder="' . $this->t("page_check_user") . '"></div><button type="submit" class="btn btn-default" style="margin-left: 5px;">' . $this->t("page_check_submit") . '</button></form>
              </div>
              <script type="text/javascript">function captureForm(b){var o=$("#output");o.removeClass("in");var x=setTimeout(function(){o.html("<br>")}, 150);$.ajax({type:"GET",url:"check.php?name="+$("#user").val()+"&table=' . $table . '"}).done(function(c){clearTimeout(x);o.html(c);o.addClass("in")});b.preventDefault();return false};</script>
              <div id="output" class="success fade" data-alert="alert" style="margin-left: 15px;"><br></div>
@@ -457,7 +475,7 @@ class Page {
         if ($next_active) {
             $pager_next = "<a href=\"$page?page={$next}{$args}\">$pager_next</a>";
         }
-        $pager_count = '<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">' . $this->lang->page_page . ' ' . $cur . '/' . $pages . '</div></div>';
+        $pager_count = '<div style=\"margin-top: 32px;\"><div style=\"text-align: center; font-size:15px;\">' . $this->t("page_page") . ' ' . $cur . '/' . $pages . '</div></div>';
         echo "$pager_prev $pager_next $pager_count";
     }
 

@@ -16,10 +16,10 @@ foreach ($rows as $row) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        $page->lang->kicks_player => $page->get_avatar($player_name, $row['uuid']),
-        $page->lang->kicks_by     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        $page->lang->kicks_reason => $page->clean($row['reason']),
-        $page->lang->kicks_when   => $page->millis_to_date($row['time']),
+        $page->t("kicks_player") => $page->get_avatar($player_name, $row['uuid']),
+        $page->t("kicks_by")     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->t("kicks_reason") => $page->clean($row['reason']),
+        $page->t("kicks_when")   => $page->millis_to_date($row['time']),
     ));
 }
 $page->table_end();

@@ -16,11 +16,11 @@ foreach ($rows as $row) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        $page->lang->warns_player  => $page->get_avatar($player_name, $row['uuid']),
-        $page->lang->warns_by      => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        $page->lang->warns_reason  => $page->clean($row['reason']),
-        $page->lang->warns_when    => $page->expiry($row),
-        $page->lang->warns_receive => (($page->active($row, 'warned') === true) ? "1" : "0"),
+        $page->t("warns_player")  => $page->get_avatar($player_name, $row['uuid']),
+        $page->t("warns_by")      => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->t("warns_reason")  => $page->clean($row['reason']),
+        $page->t("warns_when")    => $page->expiry($row),
+        $page->t("warns_receive") => (($page->active($row, 'warned') === true) ? "1" : "0"),
     ));
 }
 $page->table_end();

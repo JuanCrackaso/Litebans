@@ -16,11 +16,11 @@ foreach ($rows as $row) {
     if ($player_name === null) continue;
 
     $page->print_table_rows($row, array(
-        $page->lang->mutes_player => $page->get_avatar($player_name, $row['uuid']),
-        $page->lang->mutes_by     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
-        $page->lang->mutes_reason => $page->clean($row['reason']),
-        $page->lang->mutes_when   => $page->millis_to_date($row['time']),
-        $page->lang->mutes_expiry => $page->expiry($row),
+        $page->t("mutes_player") => $page->get_avatar($player_name, $row['uuid']),
+        $page->t("mutes_by")     => $page->get_avatar($page->get_banner_name($row), $row['banned_by_uuid']),
+        $page->t("mutes_reason") => $page->clean($row['reason']),
+        $page->t("mutes_when")   => $page->millis_to_date($row['time']),
+        $page->t("mutes_expiry") => $page->expiry($row),
     ));
 }
 $page->table_end();
